@@ -6,8 +6,9 @@ class CombatManager
 {
 public:
 
-	void Attack(Gladiator& Enemy, int Damage);
-	void Dodge(Gladiator& Player, Gladiator& Enemy);
-	void Heal(Gladiator& Player, int Amount);
+	// Combat Management
+	
+	void StartCombat(Gladiator& Player, Gladiator& Enemy);
+	void EndCombat(Gladiator& Player, Gladiator& Enemy);
 
 };

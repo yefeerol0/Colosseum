@@ -1,14 +1,12 @@
 #include "CombatManager.h"
 #include "Gladiator.h"
 
-void CombatManager::Attack(Gladiator& Enemy, int Damage)
+void CombatManager::StartCombat(Gladiator& Player, Gladiator& Enemy)
 {
+	Player.InitializeCoreValues();
+	Enemy.InitializeCoreValues();
 }
 
-void CombatManager::Dodge(Gladiator& Player, Gladiator& Enemy)
-{
-}
-
-void CombatManager::Heal(Gladiator& Player, int Amount)
+void CombatManager::EndCombat(Gladiator& Player, Gladiator& Enemy)
 {
 }

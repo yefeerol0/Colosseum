@@ -127,13 +127,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="includes\CombatActions.h" />
     <ClInclude Include="includes\CombatManager.h" />
     <ClInclude Include="includes\Gladiator.h" />
+    <ClInclude Include="includes\RandomGenerator.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\CombatActions.cpp" />
     <ClCompile Include="src\CombatManager.cpp" />
     <ClCompile Include="src\Gladiator.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\RandomGenerator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
