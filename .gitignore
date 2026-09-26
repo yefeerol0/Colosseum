@@ -77,3 +77,20 @@ Testing/
 
 # Visual Studio IntelliSense / cache
 *.ipch
+
+# Visual Studio build output (per-platform/config)
+[Dd]ebug/
+[Dd]ebug[Pp]ublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio project-user files
+*.vcxproj.user
+*.vcxproj.filters.user
