@@ -1,7 +1,9 @@
-#include <iostream>
+#include "GameManager.h"
 
 int main()
 {
-    std::cout << "Colosseum\n";
+	GameManager gameManager;
+	gameManager.StartGame();
+
     return 0;
 }
