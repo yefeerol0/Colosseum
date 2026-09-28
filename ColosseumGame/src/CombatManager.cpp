@@ -3,8 +3,8 @@
 
 void CombatManager::StartCombat(Gladiator& Player, Gladiator& Enemy)
 {
-	Player.InitializeCoreValues();
-	Enemy.InitializeCoreValues();
+	Player.InitializeHealth();
+	Enemy.InitializeHealth();
 }
 
 void CombatManager::EndCombat(Gladiator& Player, Gladiator& Enemy)

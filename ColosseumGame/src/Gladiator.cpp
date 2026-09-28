@@ -1,14 +1,39 @@
 #include "Gladiator.h"
 
-void Gladiator::InitializeCoreValues()
+void Gladiator::InitializeHealth()
 {
 	// Is called at "Combat Start"
 
 	MaxHealthPoints = Vitality * 10;
 	HealthPoints = MaxHealthPoints;
 
-	CritChance = (Luck * 5) / 2;
-	DodgeChance = (Agility * 5) / 2;
+}
 
-	// CritChance and DodgeChance are 2.5% per point of Luck and Agility.
+void Gladiator::TakeDamage(int DamageAmount)
+{
+	HealthPoints -= DamageAmount;
+
+	CheckIfDead();
+}
+
+void Gladiator::RestoreHealth(int HealAmount)
+{
+	HealthPoints += HealAmount;
+
+	if (HealthPoints > MaxHealthPoints)
+	{
+		HealthPoints = MaxHealthPoints;
+	}
+}
+
+bool Gladiator::CheckIfDead()
+{
+	if (HealthPoints <= 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }

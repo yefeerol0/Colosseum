@@ -22,5 +22,8 @@ struct Gladiator
 
 	// Functions
 
-	void InitializeCoreValues();
+	void InitializeHealth();
+	void TakeDamage(int DamageAmount);
+	void RestoreHealth(int HealAmount);
+	bool CheckIfDead();
 };

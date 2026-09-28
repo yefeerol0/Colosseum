@@ -10,5 +10,4 @@ public:
 	
 	void StartCombat(Gladiator& Player, Gladiator& Enemy);
 	void EndCombat(Gladiator& Player, Gladiator& Enemy);
-
 };
