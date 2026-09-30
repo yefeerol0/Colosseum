@@ -8,6 +8,7 @@ public:
 
 	// Combat Management
 	
-	void StartCombat(Gladiator& Player, Gladiator& Enemy);
+	void StartCombat(Gladiator& Player, int EnemyIndex);
 	void EndCombat(Gladiator& Player, Gladiator& Enemy);
+	void SpawnEnemy(int EnemyIndex);
 };

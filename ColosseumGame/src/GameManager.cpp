@@ -6,28 +6,28 @@ using namespace std;
 
 GameManager::GameManager()
 {
-	playerController = new PlayerController();
+	Controller = new PlayerController();
 }
 
 GameManager::~GameManager()
 {
-	delete playerController;
+	delete Controller;
 }
 
 void GameManager::StartGame()
 {
 	DisplayWelcomeText();
 	AskForPlayerName();
-	string name = playerController->EnterName();
+	string name = Controller->EnterName();
 	cout << "Welcome, " << name << "!" << endl;
 
 	// --- TEST ---
 
 	cout << "\n" << endl;
-	cout << "Your Gladiator's name is: " << playerController->PlayerGladiator->Name << endl;
-	cout << "Your Gladiator's Vitality is: " << playerController->PlayerGladiator->Vitality << endl;
-	cout << "Your Gladiator's Strength is: " << playerController->PlayerGladiator->Strength << endl;
-	cout << "Your Gladiator's Luck is: " << playerController->PlayerGladiator->Luck << endl;
+	cout << "Your Gladiator's name is: " << Controller->PlayerGladiator->Name << endl;
+	cout << "Your Gladiator's Vitality is: " << Controller->PlayerGladiator->Vitality << endl;
+	cout << "Your Gladiator's Strength is: " << Controller->PlayerGladiator->Strength << endl;
+	cout << "Your Gladiator's Luck is: " << Controller->PlayerGladiator->Luck << endl;
 	
 	// --- TEST END ---
 }
@@ -42,6 +42,8 @@ void GameManager::AskForPlayerName()
 	cout << "Please enter your Gladiator's name: ";
 }
 
-void GameManager::StartCombat()
+void GameManager::StartCombatLoop()
 {
+	StageNumber++;
+
 }

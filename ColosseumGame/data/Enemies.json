@@ -1,0 +1,20 @@
+{
+  "enemies": [
+    {
+      "Name": "Gladiator 1",
+      "Vitality": 5,
+      "Strength": 3,
+      "Luck": 2,
+      "Agility": 4,
+      "Recovery": 1
+    },
+    {
+      "Name": "Gladiator 2",
+      "Vitality": 8,
+      "Strength": 5,
+      "Luck": 1,
+      "Agility": 2,
+      "Recovery": 3
+    }
+  ]
+}
