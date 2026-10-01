@@ -10,5 +10,4 @@ public:
 	
 	void StartCombat(Gladiator& Player, int EnemyIndex);
 	void EndCombat(Gladiator& Player, Gladiator& Enemy);
-	void SpawnEnemy(int EnemyIndex);
 };

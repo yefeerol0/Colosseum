@@ -1,18 +1,18 @@
 #include "GameManager.h"
 #include "PlayerController.h"
-#include "Gladiator.h"
+#include "GladiatorDataLoader.h"
+#include "CombatManager.h"
 #include <iostream>
 using namespace std;
 
 GameManager::GameManager()
 {
-	Controller = new PlayerController();
+	Controller = make_unique<PlayerController>();
+	DataLoader = make_unique<GladiatorDataLoader>();
+	CombatProcessor = make_unique<CombatManager>();
 }
 
-GameManager::~GameManager()
-{
-	delete Controller;
-}
+GameManager::~GameManager() {}
 
 void GameManager::StartGame()
 {
@@ -20,16 +20,7 @@ void GameManager::StartGame()
 	AskForPlayerName();
 	string name = Controller->EnterName();
 	cout << "Welcome, " << name << "!" << endl;
-
-	// --- TEST ---
-
-	cout << "\n" << endl;
-	cout << "Your Gladiator's name is: " << Controller->PlayerGladiator->Name << endl;
-	cout << "Your Gladiator's Vitality is: " << Controller->PlayerGladiator->Vitality << endl;
-	cout << "Your Gladiator's Strength is: " << Controller->PlayerGladiator->Strength << endl;
-	cout << "Your Gladiator's Luck is: " << Controller->PlayerGladiator->Luck << endl;
-	
-	// --- TEST END ---
+	ManageCombatLoop();
 }
 
 void GameManager::DisplayWelcomeText()
@@ -42,8 +33,22 @@ void GameManager::AskForPlayerName()
 	cout << "Please enter your Gladiator's name: ";
 }
 
-void GameManager::StartCombatLoop()
+void GameManager::ManageCombatLoop()
 {
 	StageNumber++;
+	SpawnEnemy();
 
+	// TEST
+
+	cout << CurrentEnemy->Name << " has appeared!" << endl;
+	cout << CurrentEnemy->Agility << endl;
+	cout << CurrentEnemy->Strength << endl;
+	cout << CurrentEnemy->Vitality << endl;
+
+	// TEST ENDS
+}
+
+void GameManager::SpawnEnemy()
+{
+	CurrentEnemy = make_unique<Gladiator>(DataLoader->GetEnemy(StageNumber));
 }
