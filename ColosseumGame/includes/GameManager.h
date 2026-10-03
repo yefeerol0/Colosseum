@@ -2,8 +2,10 @@
 #include <memory>
 
 class PlayerController;
-class CombatManager;
 class GladiatorDataLoader;
+class ConsoleInterface;
+class CombatManager;
+
 struct Gladiator;
 
 class GameManager
@@ -17,6 +19,7 @@ private:
 
 	std::unique_ptr<PlayerController> Controller;
 	std::unique_ptr<GladiatorDataLoader> DataLoader;
+	std::unique_ptr<ConsoleInterface> UIManager;
 	std::unique_ptr<CombatManager> CombatProcessor;
 	std::unique_ptr<Gladiator> CurrentEnemy;
 

@@ -1,15 +1,18 @@
 #include "GameManager.h"
 #include "PlayerController.h"
 #include "GladiatorDataLoader.h"
+#include "ConsoleInterface.h"
 #include "CombatManager.h"
 #include <iostream>
+
 using namespace std;
 
 GameManager::GameManager()
 {
 	Controller = make_unique<PlayerController>();
 	DataLoader = make_unique<GladiatorDataLoader>();
-	CombatProcessor = make_unique<CombatManager>();
+	UIManager = make_unique<ConsoleInterface>();
+	CombatProcessor = make_unique<CombatManager>(*UIManager);
 }
 
 GameManager::~GameManager() {}
@@ -37,15 +40,7 @@ void GameManager::ManageCombatLoop()
 {
 	StageNumber++;
 	SpawnEnemy();
-
-	// TEST
-
-	cout << CurrentEnemy->Name << " has appeared!" << endl;
-	cout << CurrentEnemy->Agility << endl;
-	cout << CurrentEnemy->Strength << endl;
-	cout << CurrentEnemy->Vitality << endl;
-
-	// TEST ENDS
+	CombatProcessor->StartCombat(*Controller->PlayerGladiator, *CurrentEnemy, StageNumber);
 }
 
 void GameManager::SpawnEnemy()
