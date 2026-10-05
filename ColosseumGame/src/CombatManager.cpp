@@ -1,6 +1,7 @@
 #include "CombatManager.h"
 #include "Gladiator.h"
 #include "ConsoleInterface.h"
+#include <iostream>
 
 void CombatManager::StartCombat(Gladiator& Player, Gladiator& Enemy, int InputStageNumber)
 {
@@ -21,5 +22,15 @@ void CombatManager::EndCombat(Gladiator& Player, Gladiator& Enemy)
 
 void CombatManager::SetUpInterface()
 {
-	UIManager.DisplayCombatHUD(LocalStageNumber, PlayerGladiator->HealthPoints, EnemyGladiator->HealthPoints);
+	ConsoleData UIData;
+
+	UIData.StageNumber = LocalStageNumber;
+	UIData.PlayerName = PlayerGladiator->Name;
+	UIData.EnemyName = EnemyGladiator->Name;
+	UIData.EnemyHealth = EnemyGladiator->HealthPoints;
+	UIData.PlayerHealth = PlayerGladiator->HealthPoints;
+	UIData.PlayerMaxHealth = PlayerGladiator->MaxHealthPoints;
+	UIData.EnemyMaxHealth = EnemyGladiator->MaxHealthPoints;
+
+	UIManager.DisplayCombatHUD(UIData);
 }
