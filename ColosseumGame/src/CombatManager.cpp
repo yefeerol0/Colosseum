@@ -1,22 +1,51 @@
 #include "CombatManager.h"
+#include "PlayerController.h"
 #include "Gladiator.h"
+#include "CombatActions.h"
 #include "ConsoleInterface.h"
-#include <iostream>
 
-void CombatManager::StartCombat(Gladiator& Player, Gladiator& Enemy, int InputStageNumber)
+void CombatManager::StartCombat(PlayerController& InController, Gladiator& Enemy, int InputStageNumber)
 {
 	LocalStageNumber = InputStageNumber;
 
-	PlayerGladiator = &Player;
+	Controller = &InController;
+
+	PlayerGladiator = Controller->PlayerGladiator;
 	EnemyGladiator = &Enemy;
+
+	CombatActions Actions;
 
 	PlayerGladiator->InitializeHealth();
 	EnemyGladiator->InitializeHealth();
 
 	SetUpInterface();
+	StartPlayerTurn();
 }
 
-void CombatManager::EndCombat(Gladiator& Player, Gladiator& Enemy)
+void CombatManager::EndCombat()
+{
+}
+
+void CombatManager::StartPlayerTurn()
+{
+
+	char SelectedAction = Controller->DecideAction();
+
+	switch (SelectedAction)
+	{
+	case '1':
+		Actions->Attack(*EnemyGladiator, *PlayerGladiator);
+		break;
+	case '2':
+		Actions->Dodge(*PlayerGladiator);
+		break;
+	case '3':
+		Actions->Heal(*PlayerGladiator);
+		break;
+	}
+}
+
+void CombatManager::StartEnemyTurn()
 {
 }
 

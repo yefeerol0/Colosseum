@@ -20,6 +20,11 @@ void CombatActions::Attack(Gladiator& Target, Gladiator& Player)
 	Target.TakeDamage(DamageAmount);
 }
 
+void CombatActions::Dodge(Gladiator& Player)
+{
+	int Agility = Player.Agility;
+}
+
 void CombatActions::Heal(Gladiator& Player)
 {
 	int Recovery = Player.Recovery;

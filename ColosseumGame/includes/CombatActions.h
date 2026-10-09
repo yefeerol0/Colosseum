@@ -11,10 +11,12 @@ public:
 	RandomGenerator RandomGen;
 
 	void Attack(Gladiator& Target, Gladiator& Player);
+	void Dodge(Gladiator& Player);
 	void Heal(Gladiator& Player);
 
 	bool CheckCrit(Gladiator& Player);
 	bool CheckDodge(Gladiator& Target);
+
 };
 
 //===========================================

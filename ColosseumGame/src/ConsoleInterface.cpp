@@ -64,24 +64,6 @@ void ConsoleInterface::PrintActionOptions()
 
 void ConsoleInterface::DisplayCombatHUD(const ConsoleData& UIData)
 {
-	// ------TEST----------------
-
-	AddMessageToCombatLog("You have entered the Colosseum!");
-	AddMessageToCombatLog("Your opponent is " + UIData.EnemyName + ".");
-	AddMessageToCombatLog("Prepare for battle!");
-	AddMessageToCombatLog("You have chosen to attack!");
-	AddMessageToCombatLog("You have chosen to dodge!");
-	AddMessageToCombatLog("You have chosen to heal!");
-	AddMessageToCombatLog("You have taken damage!");
-	AddMessageToCombatLog("You have healed yourself!");
-	AddMessageToCombatLog("You have defeated your opponent!");
-	AddMessageToCombatLog("You have been defeated!");
-	AddMessageToCombatLog("You have advanced to the next stage!");
-	AddMessageToCombatLog("You have been knocked down!");
-
-	// ------TEST END----------------
-
-
 	ClearConsole();
 	cout << "===========================================" << endl;
 	PrintProgression(UIData.StageNumber);

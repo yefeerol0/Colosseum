@@ -13,4 +13,5 @@ public:
 	Gladiator* PlayerGladiator;
 
     std::string EnterName();
+	char DecideAction();
 };

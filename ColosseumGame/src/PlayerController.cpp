@@ -1,6 +1,8 @@
 #include "PlayerController.h"
 #include "Gladiator.h"
+#include "conio.h" // For _getch() function
 #include <iostream>
+
 
 PlayerController::PlayerController()
 {
@@ -18,4 +20,19 @@ std::string PlayerController::EnterName()
 	std::cin >> name;
 	PlayerGladiator->Name = name;
 	return name;
+}
+
+char PlayerController::DecideAction()
+{
+	char action = _getch();
+
+	if (action == '1' || action == '2' || action == '3')
+	{
+		return action;
+	}
+	else
+	{
+		std::cout << "Invalid" << std::endl;
+		return DecideAction();
+	}
 }

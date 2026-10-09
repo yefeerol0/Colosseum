@@ -40,7 +40,7 @@ void GameManager::ManageCombatLoop()
 {
 	StageNumber++;
 	SpawnEnemy();
-	CombatProcessor->StartCombat(*Controller->PlayerGladiator, *CurrentEnemy, StageNumber);
+	CombatProcessor->StartCombat(*Controller, *CurrentEnemy, StageNumber);
 }
 
 void GameManager::SpawnEnemy()
