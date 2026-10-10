@@ -1,5 +1,7 @@
 #pragma once
 #include "RandomGenerator.h"
+#include <string>
+#include <vector>
 
 class Gladiator;
 
@@ -16,6 +18,10 @@ public:
 
 	bool CheckCrit(Gladiator& Player);
 	bool CheckDodge(Gladiator& Target);
+
+	void GenerateCombatLog(const std::string& message);
+	std::vector<std::string> LogsToBeAdded;
+	std::vector<std::string> ForwardCombatLogs();
 
 };
 

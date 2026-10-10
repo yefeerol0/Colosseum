@@ -30,12 +30,12 @@ private:
 
 	// Combat Log Functions
 
-	void AddMessageToCombatLog(const std::string& LogMessage);
 	void PrintCombatLog();
 	void PrintActionOptions();
 
 public:
 
+	void AddMessageToCombatLog(const std::string& LogMessage);
 	void DisplayCombatHUD(const ConsoleData& UIData);
 
 };

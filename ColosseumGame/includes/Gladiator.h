@@ -12,10 +12,13 @@ struct Gladiator
 	float CritChance = 0;
 	float DodgeChance = 0;
 
+	bool IsDodging = false;
+	bool IsCounterattacking = false;
+
 	// Stats
 
 	int Vitality = 5; // Health points
-	int Strength = 1; // Damage
+	int Strength = 4; // Damage
 	int Luck = 1; // Chance to crit
 	int Agility = 1; // Chance to dodge
 	int Recovery = 1; // Amount to heal

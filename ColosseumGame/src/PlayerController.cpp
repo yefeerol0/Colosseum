@@ -32,7 +32,6 @@ char PlayerController::DecideAction()
 	}
 	else
 	{
-		std::cout << "Invalid" << std::endl;
-		return DecideAction();
+		return 0;
 	}
 }
