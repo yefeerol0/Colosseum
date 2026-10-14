@@ -1,10 +1,12 @@
 #pragma once
 #include "CombatActions.h" 
+#include "EnemyBehavior.h"
 
 class PlayerController;
 class Gladiator;
 class CombatActions;
 class ConsoleInterface;
+class EnemyBehavior;
 
 class CombatManager
 {
@@ -15,6 +17,7 @@ private:
 	Gladiator* EnemyGladiator = nullptr;
 	CombatActions Actions;
 	ConsoleInterface& UIManager;
+	EnemyBehavior EnemyAI;
 
 	int LocalStageNumber = 0; // This variable copies the stage number from GameManager.
 

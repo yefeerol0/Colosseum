@@ -130,6 +130,7 @@
     <ClInclude Include="includes\CombatActions.h" />
     <ClInclude Include="includes\CombatManager.h" />
     <ClInclude Include="includes\ConsoleInterface.h" />
+    <ClInclude Include="includes\EnemyBehavior.h" />
     <ClInclude Include="includes\GameManager.h" />
     <ClInclude Include="includes\Gladiator.h" />
     <ClInclude Include="includes\GladiatorDataLoader.h" />
@@ -140,6 +141,7 @@
     <ClCompile Include="src\CombatActions.cpp" />
     <ClCompile Include="src\CombatManager.cpp" />
     <ClCompile Include="src\ConsoleInterface.cpp" />
+    <ClCompile Include="src\EnemyBehavior.cpp" />
     <ClCompile Include="src\GameManager.cpp" />
     <ClCompile Include="src\Gladiator.cpp" />
     <ClCompile Include="src\GladiatorDataLoader.cpp" />

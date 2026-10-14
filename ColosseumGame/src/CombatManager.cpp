@@ -54,6 +54,32 @@ void CombatManager::StartPlayerTurn()
 
 void CombatManager::StartEnemyTurn()
 {
+	DecisionParameters EnemyDecisionParams;
+
+	EnemyDecisionParams.SelfHealth = EnemyGladiator->HealthPoints;
+	EnemyDecisionParams.PlayerHealth = PlayerGladiator->HealthPoints;
+	EnemyDecisionParams.PersonalityBonus = EnemyGladiator->Agility; // Using Agility as a placeholder for personality bonus
+	EnemyDecisionParams.isPlayerDodging = PlayerGladiator->IsDodging;
+
+	int CurrentAgression = EnemyAI.DecideAction(EnemyDecisionParams);
+
+	switch (CurrentAgression)
+	{
+	case 0:
+		Actions.Heal(*EnemyGladiator);
+		break;
+	case 1:
+		Actions.Dodge(*EnemyGladiator);
+		break;
+	case 2:
+		Actions.Attack(*PlayerGladiator, *EnemyGladiator);
+		break;
+	default:
+		UIManager.AddMessageToCombatLog("Invalid action selected.");
+		break;
+	}
+
+	UpdateInterface();
 	StartPlayerTurn();
 }
 
