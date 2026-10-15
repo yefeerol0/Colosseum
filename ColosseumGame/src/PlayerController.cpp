@@ -22,16 +22,19 @@ std::string PlayerController::EnterName()
 	return name;
 }
 
-char PlayerController::DecideAction()
+PlayerActionOptions PlayerController::DecideAction()
 {
 	char action = _getch();
 
-	if (action == '1' || action == '2' || action == '3')
+	switch (action)
 	{
-		return action;
-	}
-	else
-	{
-		return 0;
+	case '1':
+		return PlayerActionOptions::Attack;
+	case '2':
+		return PlayerActionOptions::Dodge;
+	case '3':
+		return PlayerActionOptions::Heal;
+	default:
+		return PlayerActionOptions::Invalid;
 	}
 }

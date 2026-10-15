@@ -5,6 +5,8 @@ struct Gladiator
 {
 	// Core Values
 
+	bool isDead = false;
+
 	std::string Name = "Unknown";
 	int MaxHealthPoints = 0;
 	int HealthPoints = 0;
@@ -22,6 +24,10 @@ struct Gladiator
 	int Luck = 1; // Chance to crit
 	int Agility = 1; // Chance to dodge
 	int Recovery = 1; // Amount to heal
+
+	// AI Behavior
+
+	float EnemyUnpredictability = 0.1f;
 
 	// Functions
 

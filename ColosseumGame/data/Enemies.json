@@ -6,7 +6,8 @@
       "Strength": 3,
       "Luck": 2,
       "Agility": 4,
-      "Recovery": 1
+      "Recovery": 1,
+      "EnemyUnpredictability": 0.1
     },
     {
       "Name": "Gladiator 2",
@@ -14,7 +15,8 @@
       "Strength": 5,
       "Luck": 1,
       "Agility": 2,
-      "Recovery": 3
+      "Recovery": 3,
+      "EnemyUnpredictability": 0.1
     }
   ]
 }

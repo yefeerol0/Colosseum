@@ -13,7 +13,7 @@ void Gladiator::TakeDamage(int DamageAmount)
 {
 	HealthPoints -= DamageAmount;
 
-	CheckIfDead();
+	isDead = CheckIfDead();
 }
 
 void Gladiator::RestoreHealth(int HealAmount)

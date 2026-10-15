@@ -4,7 +4,6 @@
 
 class PlayerController;
 class Gladiator;
-class CombatActions;
 class ConsoleInterface;
 class EnemyBehavior;
 
@@ -36,5 +35,12 @@ public:
 
 	void SetUpInterface();
 	void UpdateInterface();
+
+	// AI Behavior Parameters
+
+	DecisionParameters EnemyDecisionParameters{};
+
+	void CacheDecisionParameters();
+	void UpdateDecisionParameters();
 
 };

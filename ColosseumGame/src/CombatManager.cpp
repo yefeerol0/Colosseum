@@ -3,7 +3,6 @@
 #include "Gladiator.h"
 #include "ConsoleInterface.h"
 
-
 void CombatManager::StartCombat(PlayerController& InController, Gladiator& Enemy, int InputStageNumber)
 {
 	LocalStageNumber = InputStageNumber;
@@ -16,31 +15,41 @@ void CombatManager::StartCombat(PlayerController& InController, Gladiator& Enemy
 	PlayerGladiator->InitializeHealth();
 	EnemyGladiator->InitializeHealth();
 
+	CacheDecisionParameters();
 	SetUpInterface();
 	StartPlayerTurn();
 }
 
 void CombatManager::EndCombat()
 {
+	UIManager.AddMessageToCombatLog("The battle is over!");
+	UpdateInterface();
 }
 
 void CombatManager::StartPlayerTurn()
 {
 
-	char SelectedAction = Controller->DecideAction();
+	PlayerActionOptions SelectedAction = Controller->DecideAction();
 
 	switch (SelectedAction)
 	{
-	case '1':
+	case PlayerActionOptions::Attack:
 		Actions.Attack(*EnemyGladiator, *PlayerGladiator);
+		
+		if (EnemyGladiator->isDead)
+		{
+			EndCombat();
+			return;
+		}
+
 		break;
-	case '2':
+	case PlayerActionOptions::Dodge:
 		Actions.Dodge(*PlayerGladiator);
 		break;
-	case '3':
+	case PlayerActionOptions::Heal:
 		Actions.Heal(*PlayerGladiator);
 		break;
-	default:
+	case PlayerActionOptions::Invalid:
 		UIManager.AddMessageToCombatLog("Invalid action selected. Press '1', '2', or '3' to choose an action.");
 		break;
 	}
@@ -54,25 +63,26 @@ void CombatManager::StartPlayerTurn()
 
 void CombatManager::StartEnemyTurn()
 {
-	DecisionParameters EnemyDecisionParams;
+	UpdateDecisionParameters();
 
-	EnemyDecisionParams.SelfHealth = EnemyGladiator->HealthPoints;
-	EnemyDecisionParams.PlayerHealth = PlayerGladiator->HealthPoints;
-	EnemyDecisionParams.PersonalityBonus = EnemyGladiator->Agility; // Using Agility as a placeholder for personality bonus
-	EnemyDecisionParams.isPlayerDodging = PlayerGladiator->IsDodging;
+	EnemyActionOptions SelectedAction = EnemyAI.DecideAction(EnemyDecisionParameters);
 
-	int CurrentAgression = EnemyAI.DecideAction(EnemyDecisionParams);
-
-	switch (CurrentAgression)
+	switch (SelectedAction)
 	{
-	case 0:
-		Actions.Heal(*EnemyGladiator);
+	case EnemyActionOptions::Attack:
+		Actions.Attack(*PlayerGladiator, *EnemyGladiator);
+
+		if (PlayerGladiator->isDead)
+		{
+			EndCombat();
+		}
+
 		break;
-	case 1:
+	case EnemyActionOptions::Dodge:
 		Actions.Dodge(*EnemyGladiator);
 		break;
-	case 2:
-		Actions.Attack(*PlayerGladiator, *EnemyGladiator);
+	case EnemyActionOptions::Heal:
+		Actions.Heal( *EnemyGladiator);
 		break;
 	default:
 		UIManager.AddMessageToCombatLog("Invalid action selected.");
@@ -106,4 +116,23 @@ void CombatManager::UpdateInterface()
 	}
 
 	SetUpInterface();
+}
+
+void CombatManager::CacheDecisionParameters()
+{
+	EnemyDecisionParameters.SelfMaxHealth = EnemyGladiator->MaxHealthPoints;
+	EnemyDecisionParameters.PlayerMaxHealth = PlayerGladiator->MaxHealthPoints;
+	EnemyDecisionParameters.StrengthStat = EnemyGladiator->Strength;
+	EnemyDecisionParameters.LuckStat = EnemyGladiator->Luck;
+	EnemyDecisionParameters.AgilityStat = EnemyGladiator->Agility;
+	EnemyDecisionParameters.RecoveryStat = EnemyGladiator->Recovery;
+	EnemyDecisionParameters.Unpredictability = EnemyGladiator->EnemyUnpredictability;
+}
+
+void CombatManager::UpdateDecisionParameters()
+{
+	EnemyDecisionParameters.SelfHealth = EnemyGladiator->HealthPoints;
+	EnemyDecisionParameters.PlayerHealth = PlayerGladiator->HealthPoints;
+	EnemyDecisionParameters.isPlayerDodging = PlayerGladiator->IsDodging;
+	EnemyDecisionParameters.isCounterattacking = EnemyGladiator->IsCounterattacking;
 }

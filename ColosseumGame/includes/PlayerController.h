@@ -3,6 +3,13 @@
 
 class Gladiator;
 
+enum class PlayerActionOptions
+{
+	Attack,
+	Dodge,
+	Heal,
+	Invalid
+};
 class PlayerController
 {
 public:
@@ -13,5 +20,5 @@ public:
 	Gladiator* PlayerGladiator;
 
     std::string EnterName();
-	char DecideAction();
+	PlayerActionOptions DecideAction();
 };
