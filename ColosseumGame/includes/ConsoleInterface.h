@@ -33,9 +33,17 @@ private:
 	void PrintCombatLog();
 	void PrintActionOptions();
 
+
 public:
 
+	void ClearCombatLog();
 	void AddMessageToCombatLog(const std::string& LogMessage);
 	void DisplayCombatHUD(const ConsoleData& UIData);
+
+	// Other Screens
+
+	void DisplayStartMenu();
+	void DisplayStoryScreen(const std::string& PlayerName);
+	void DisplayGameOverMenu(const std::string& PlayerName, int DeathStage);
 
 };

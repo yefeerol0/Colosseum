@@ -3,7 +3,7 @@
 #include "Gladiator.h"
 #include "ConsoleInterface.h"
 
-void CombatManager::StartCombat(PlayerController& InController, Gladiator& Enemy, int InputStageNumber)
+CombatResult CombatManager::StartCombat(PlayerController& InController, Gladiator& Enemy, int InputStageNumber)
 {
 	LocalStageNumber = InputStageNumber;
 
@@ -18,15 +18,30 @@ void CombatManager::StartCombat(PlayerController& InController, Gladiator& Enemy
 	CacheDecisionParameters();
 	SetUpInterface();
 	StartPlayerTurn();
+
+	while (true)
+	{
+		if (StartPlayerTurn())
+		{
+			return CombatResult::PlayerWon;
+		}
+
+		if (StartEnemyTurn())
+		{
+			return CombatResult::PlayerLost;
+		}
+	}
 }
 
 void CombatManager::EndCombat()
 {
+	UIManager.ClearCombatLog();
+	Actions.LogsToBeAdded.clear();
 	UIManager.AddMessageToCombatLog("The battle is over!");
 	UpdateInterface();
 }
 
-void CombatManager::StartPlayerTurn()
+bool CombatManager::StartPlayerTurn()
 {
 
 	PlayerActionOptions SelectedAction = Controller->DecideAction();
@@ -35,13 +50,6 @@ void CombatManager::StartPlayerTurn()
 	{
 	case PlayerActionOptions::Attack:
 		Actions.Attack(*EnemyGladiator, *PlayerGladiator);
-		
-		if (EnemyGladiator->isDead)
-		{
-			EndCombat();
-			return;
-		}
-
 		break;
 	case PlayerActionOptions::Dodge:
 		Actions.Dodge(*PlayerGladiator);
@@ -57,11 +65,17 @@ void CombatManager::StartPlayerTurn()
 	// Invalid action part is currently not working as intended since it skips the player turn.
 	// It will be fixed later on.
 
+	if (EnemyGladiator->isDead)
+	{
+		EndCombat();
+		return true;
+	}
+
 	UpdateInterface();
-	StartEnemyTurn();
+	return false;
 }
 
-void CombatManager::StartEnemyTurn()
+bool CombatManager::StartEnemyTurn()
 {
 	UpdateDecisionParameters();
 
@@ -71,12 +85,6 @@ void CombatManager::StartEnemyTurn()
 	{
 	case EnemyActionOptions::Attack:
 		Actions.Attack(*PlayerGladiator, *EnemyGladiator);
-
-		if (PlayerGladiator->isDead)
-		{
-			EndCombat();
-		}
-
 		break;
 	case EnemyActionOptions::Dodge:
 		Actions.Dodge(*EnemyGladiator);
@@ -89,8 +97,14 @@ void CombatManager::StartEnemyTurn()
 		break;
 	}
 
+	if (PlayerGladiator->isDead)
+	{
+		EndCombat();
+		return true;
+	}
+
 	UpdateInterface();
-	StartPlayerTurn();
+	return false;
 }
 
 void CombatManager::SetUpInterface()

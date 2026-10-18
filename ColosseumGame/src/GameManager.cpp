@@ -40,10 +40,33 @@ void GameManager::ManageCombatLoop()
 {
 	StageNumber++;
 	SpawnEnemy();
-	CombatProcessor->StartCombat(*Controller, *CurrentEnemy, StageNumber);
+
+	CombatResult Result = CombatProcessor->StartCombat(*Controller, *CurrentEnemy, StageNumber);
+	
+	if (Result == CombatResult::PlayerLost)
+	{
+		GameOver();
+		return;
+	}
+	else
+	{
+		StartUpgradeSequence();
+	}
+}
+
+void GameManager::StartUpgradeSequence()
+{
+	ManageCombatLoop();
+
+	// This section is yet to be completed.
 }
 
 void GameManager::SpawnEnemy()
 {
 	CurrentEnemy = make_unique<Gladiator>(DataLoader->GetEnemy(StageNumber));
+}
+
+void GameManager::GameOver()
+{
+	cout << "Game Over!" << endl;
 }

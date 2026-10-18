@@ -27,6 +27,8 @@ private:
 	void AskForPlayerName();
 	void ManageCombatLoop();
 	void SpawnEnemy();
+	void StartUpgradeSequence();
+	void GameOver();
 
 public:
 

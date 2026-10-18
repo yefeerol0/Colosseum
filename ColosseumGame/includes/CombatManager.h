@@ -7,6 +7,12 @@ class Gladiator;
 class ConsoleInterface;
 class EnemyBehavior;
 
+enum class CombatResult
+{
+	PlayerWon,
+	PlayerLost
+};
+
 class CombatManager
 {
 private:
@@ -16,7 +22,7 @@ private:
 	Gladiator* EnemyGladiator = nullptr;
 	CombatActions Actions;
 	ConsoleInterface& UIManager;
-	EnemyBehavior EnemyAI;
+	EnemyBehavior EnemyAI{};
 
 	int LocalStageNumber = 0; // This variable copies the stage number from GameManager.
 
@@ -26,10 +32,11 @@ public:
 
 	// Combat Management
 	
-	void StartCombat(PlayerController& InController, Gladiator& Enemy, int InputStageNumber);
+	CombatResult StartCombat(PlayerController& InController, Gladiator& Enemy, int InputStageNumber);
 	void EndCombat();
-	void StartPlayerTurn();
-	void StartEnemyTurn();
+
+	bool StartPlayerTurn();
+	bool StartEnemyTurn();
 
 	// UI Functions
 

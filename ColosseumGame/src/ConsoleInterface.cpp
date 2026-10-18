@@ -62,6 +62,11 @@ void ConsoleInterface::PrintActionOptions()
 	cout << left << setw(12) << "{1} Attack" << setw(12) << "{2} Dodge" << setw(14) << "{3} Heal" << endl;
 }
 
+void ConsoleInterface::ClearCombatLog()
+{
+	CombatLogLines.clear();
+}
+
 void ConsoleInterface::DisplayCombatHUD(const ConsoleData& UIData)
 {
 	ClearConsole();
@@ -75,4 +80,19 @@ void ConsoleInterface::DisplayCombatHUD(const ConsoleData& UIData)
 	PrintCombatLog();
 	cout << "===========================================" << endl;
 	PrintActionOptions();	
+}
+
+void ConsoleInterface::DisplayStartMenu()
+{
+
+}
+
+void ConsoleInterface::DisplayStoryScreen(const std::string& PlayerName)
+{
+
+}
+
+void ConsoleInterface::DisplayGameOverMenu(const std::string & PlayerName, int DeathStage)
+{
+
 }
