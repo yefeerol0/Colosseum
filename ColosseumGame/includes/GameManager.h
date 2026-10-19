@@ -23,8 +23,14 @@ private:
 	std::unique_ptr<CombatManager> CombatProcessor;
 	std::unique_ptr<Gladiator> CurrentEnemy;
 
+	// GAME START
+
 	void DisplayWelcomeText();
+	void WaitForStartInput();
 	void AskForPlayerName();
+
+	// GAME LOOP
+
 	void ManageCombatLoop();
 	void SpawnEnemy();
 	void StartUpgradeSequence();

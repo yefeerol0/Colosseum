@@ -4,6 +4,7 @@ void Gladiator::InitializeHealth()
 {
 	// Is called at "Combat Start"
 
+	isDead = false;
 	MaxHealthPoints = Vitality * 10;
 	HealthPoints = MaxHealthPoints;
 

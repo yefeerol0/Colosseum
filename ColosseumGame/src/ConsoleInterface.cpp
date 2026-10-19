@@ -5,9 +5,24 @@ using namespace std;
 
 void ConsoleInterface::ClearConsole()
 {
-    cout << "\033[2J\033[1;1H"; 
+	cout << "\033[3J\033[2J\033[H" << flush;
 
 	// An ANSI escape sequence. Previously, I was using system("cls") which was only for Windows, but this works on other systems as well.
+}
+
+void ConsoleInterface::PrintTitle()
+{
+	std::cout << R"ASCII(
+
+ ######   ######  ##        ######   ######   ######  ######## ##    ## ##     ##
+##    ## ##    ## ##       ##    ## ##    ## ##    ## ##       ##    ## ###   ###
+##       ##    ## ##       ##    ## ##       ##       ##       ##    ## #### ####
+##       ##    ## ##       ##    ##  ######   ######  ######   ##    ## ## ### ##
+##       ##    ## ##       ##    ##       ##       ## ##       ##    ## ##     ##
+##    ## ##    ## ##       ##    ## ##    ## ##    ## ##       ##    ## ##     ##
+ ######   ######  ########  ######   ######   ######  ########  ######  ##     ##
+                                                                              
+	)ASCII" << std::endl;
 }
 
 void ConsoleInterface::PrintProgression(int StageNumber)
@@ -84,6 +99,11 @@ void ConsoleInterface::DisplayCombatHUD(const ConsoleData& UIData)
 
 void ConsoleInterface::DisplayStartMenu()
 {
+	ClearConsole();
+	PrintTitle();
+
+	cout << "Welcome to the Colosseum!" << endl;
+	cout << "\x1b[5mPress any key to start!\x1b[0m\n" << endl; // Another ANSI code for blinking text.
 
 }
 
@@ -92,7 +112,11 @@ void ConsoleInterface::DisplayStoryScreen(const std::string& PlayerName)
 
 }
 
-void ConsoleInterface::DisplayGameOverMenu(const std::string & PlayerName, int DeathStage)
+void ConsoleInterface::DisplayGameOverMenu()
 {
+	ClearConsole();
+	PrintTitle();
 
+	cout << "You lost!" << endl;
+	cout << "\x1b[5mPress any key to re-start!\x1b[0m\n" << endl;
 }

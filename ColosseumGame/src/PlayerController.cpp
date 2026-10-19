@@ -14,6 +14,15 @@ PlayerController::~PlayerController()
 	delete PlayerGladiator;
 }
 
+void PlayerController::PressAnyKey()
+{
+	(void)_getch();
+
+	// Press any key does not use the pressed key at any point in code.
+	// However, compiler throws a warning since the returned value is not used.
+	// Therefore, I added (void) to tell the compiler the result is not important.
+}
+
 std::string PlayerController::EnterName()
 {
 	std::string name;

@@ -22,6 +22,10 @@ private:
 
 	void ClearConsole();
 
+	// Menu Functions
+
+	void PrintTitle();
+
 	// HUD Functions
 
 	void PrintProgression(int StageNumber);
@@ -44,6 +48,6 @@ public:
 
 	void DisplayStartMenu();
 	void DisplayStoryScreen(const std::string& PlayerName);
-	void DisplayGameOverMenu(const std::string& PlayerName, int DeathStage);
+	void DisplayGameOverMenu();
 
 };

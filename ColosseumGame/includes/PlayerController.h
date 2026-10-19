@@ -19,6 +19,7 @@ public:
 
 	Gladiator* PlayerGladiator;
 
+	void PressAnyKey();
     std::string EnterName();
 	PlayerActionOptions DecideAction();
 };

@@ -19,10 +19,11 @@ GameManager::~GameManager() {}
 
 void GameManager::StartGame()
 {
-	DisplayWelcomeText();
+	StageNumber = 0;
+
+	UIManager->DisplayStartMenu();
+	Controller->PressAnyKey();
 	AskForPlayerName();
-	string name = Controller->EnterName();
-	cout << "Welcome, " << name << "!" << endl;
 	ManageCombatLoop();
 }
 
@@ -34,6 +35,8 @@ void GameManager::DisplayWelcomeText()
 void GameManager::AskForPlayerName()
 {
 	cout << "Please enter your Gladiator's name: ";
+	string name = Controller->EnterName();
+	cout << name << ", Welcome to the Colosseum!" << endl;
 }
 
 void GameManager::ManageCombatLoop()
@@ -68,5 +71,7 @@ void GameManager::SpawnEnemy()
 
 void GameManager::GameOver()
 {
-	cout << "Game Over!" << endl;
+	UIManager->DisplayGameOverMenu();
+	Controller->PressAnyKey();
+	StartGame();
 }

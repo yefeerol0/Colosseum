@@ -17,7 +17,6 @@ CombatResult CombatManager::StartCombat(PlayerController& InController, Gladiato
 
 	CacheDecisionParameters();
 	SetUpInterface();
-	StartPlayerTurn();
 
 	while (true)
 	{
@@ -43,35 +42,37 @@ void CombatManager::EndCombat()
 
 bool CombatManager::StartPlayerTurn()
 {
+	PlayerActionOptions SelectedAction = PlayerActionOptions::Invalid;
 
-	PlayerActionOptions SelectedAction = Controller->DecideAction();
-
-	switch (SelectedAction)
+	while (SelectedAction == PlayerActionOptions::Invalid)
 	{
-	case PlayerActionOptions::Attack:
-		Actions.Attack(*EnemyGladiator, *PlayerGladiator);
-		break;
-	case PlayerActionOptions::Dodge:
-		Actions.Dodge(*PlayerGladiator);
-		break;
-	case PlayerActionOptions::Heal:
-		Actions.Heal(*PlayerGladiator);
-		break;
-	case PlayerActionOptions::Invalid:
-		UIManager.AddMessageToCombatLog("Invalid action selected. Press '1', '2', or '3' to choose an action.");
-		break;
+		SelectedAction = Controller->DecideAction();
+
+		switch (SelectedAction)
+		{
+		case PlayerActionOptions::Attack:
+			Actions.Attack(*EnemyGladiator, *PlayerGladiator);
+			break;
+		case PlayerActionOptions::Dodge:
+			Actions.Dodge(*PlayerGladiator);
+			break;
+		case PlayerActionOptions::Heal:
+			Actions.Heal(*PlayerGladiator);
+			break;
+		case PlayerActionOptions::Invalid:
+			UIManager.AddMessageToCombatLog("Invalid action selected. Press '1', '2', or '3' to choose an action.");
+			break;
+		}
+
+		if (EnemyGladiator->isDead)
+		{
+			EndCombat();
+			return true;
+		}
+		
+		UpdateInterface();
 	}
 
-	// Invalid action part is currently not working as intended since it skips the player turn.
-	// It will be fixed later on.
-
-	if (EnemyGladiator->isDead)
-	{
-		EndCombat();
-		return true;
-	}
-
-	UpdateInterface();
 	return false;
 }
 
