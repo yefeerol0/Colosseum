@@ -64,7 +64,7 @@ float EnemyBehavior::AddRandomnessToScore(float Score, DecisionParameters& Decis
 	return Score;
 }
 
-EnemyActionOptions EnemyBehavior::DecideAction(DecisionParameters& DecisionParameters)
+ActionTypes EnemyBehavior::DecideAction(DecisionParameters& DecisionParameters)
 {
 	float AttackScore = CalculateAttackScore(DecisionParameters);
 	float DodgeScore = CalculateDodgeScore(DecisionParameters);
@@ -72,14 +72,14 @@ EnemyActionOptions EnemyBehavior::DecideAction(DecisionParameters& DecisionParam
 
 	if (AttackScore >= DodgeScore && AttackScore >= HealScore)
 	{
-		return EnemyActionOptions::Attack;
+		return ActionTypes::Attack;
 	}
 	else if (DodgeScore >= HealScore)
 	{
-		return EnemyActionOptions::Dodge;
+		return ActionTypes::Dodge;
 	}
 	else
 	{
-		return EnemyActionOptions::Heal;
+		return ActionTypes::Heal;
 	}
 }

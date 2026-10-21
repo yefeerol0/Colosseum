@@ -1,5 +1,6 @@
 #pragma once
 #include "RandomGenerator.h"
+#include "ActionTypes.h"
 #include <string>
 #include <vector>
 
@@ -23,6 +24,7 @@ public:
 	std::vector<std::string> LogsToBeAdded;
 	std::vector<std::string> ForwardCombatLogs();
 
+	void ExecuteAction(ActionTypes SelectedAction, Gladiator& Instigator, Gladiator& Target);
 };
 
 //===========================================

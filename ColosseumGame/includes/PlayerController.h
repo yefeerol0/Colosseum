@@ -1,15 +1,9 @@
 #pragma once
+#include "ActionTypes.h"
 #include <string>
 
 class Gladiator;
 
-enum class PlayerActionOptions
-{
-	Attack,
-	Dodge,
-	Heal,
-	Invalid
-};
 class PlayerController
 {
 public:
@@ -21,5 +15,5 @@ public:
 
 	void PressAnyKey();
     std::string EnterName();
-	PlayerActionOptions DecideAction();
+	ActionTypes DecideAction();
 };

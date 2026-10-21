@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="includes\ActionTypes.h" />
     <ClInclude Include="includes\CombatActions.h" />
     <ClInclude Include="includes\CombatManager.h" />
     <ClInclude Include="includes\ConsoleInterface.h" />

@@ -103,3 +103,26 @@ std::vector<std::string> CombatActions::ForwardCombatLogs()
 	LogsToBeAdded.clear();
 	return LogPackage;
 }
+
+void CombatActions::ExecuteAction(ActionTypes SelectedAction, Gladiator& Instigator, Gladiator& Target)
+{
+	switch (SelectedAction)
+	{
+
+	case ActionTypes::Attack:
+
+		Attack(Target, Instigator);
+		break;
+
+	case ActionTypes::Dodge:
+
+		Dodge(Instigator);
+		break;
+
+	case ActionTypes::Heal:
+
+		Heal(Instigator);
+		break;
+
+	}
+}

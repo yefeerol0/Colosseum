@@ -42,6 +42,9 @@
     <ClInclude Include="includes\EnemyBehavior.h">
       <Filter>Üst Bilgi Dosyaları</Filter>
     </ClInclude>
+    <ClInclude Include="includes\ActionTypes.h">
+      <Filter>Üst Bilgi Dosyaları</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Gladiator.cpp">

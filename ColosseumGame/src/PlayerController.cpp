@@ -31,19 +31,19 @@ std::string PlayerController::EnterName()
 	return name;
 }
 
-PlayerActionOptions PlayerController::DecideAction()
+ActionTypes PlayerController::DecideAction()
 {
 	char action = _getch();
 
 	switch (action)
 	{
 	case '1':
-		return PlayerActionOptions::Attack;
+		return ActionTypes::Attack;
 	case '2':
-		return PlayerActionOptions::Dodge;
+		return ActionTypes::Dodge;
 	case '3':
-		return PlayerActionOptions::Heal;
+		return ActionTypes::Heal;
 	default:
-		return PlayerActionOptions::Invalid;
+		return ActionTypes::Invalid;
 	}
 }

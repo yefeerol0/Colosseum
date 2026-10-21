@@ -42,37 +42,24 @@ void CombatManager::EndCombat()
 
 bool CombatManager::StartPlayerTurn()
 {
-	PlayerActionOptions SelectedAction = PlayerActionOptions::Invalid;
+	ActionTypes SelectedAction = Controller->DecideAction();
 
-	while (SelectedAction == PlayerActionOptions::Invalid)
+	while (SelectedAction == ActionTypes::Invalid)
 	{
-		SelectedAction = Controller->DecideAction();
-
-		switch (SelectedAction)
-		{
-		case PlayerActionOptions::Attack:
-			Actions.Attack(*EnemyGladiator, *PlayerGladiator);
-			break;
-		case PlayerActionOptions::Dodge:
-			Actions.Dodge(*PlayerGladiator);
-			break;
-		case PlayerActionOptions::Heal:
-			Actions.Heal(*PlayerGladiator);
-			break;
-		case PlayerActionOptions::Invalid:
-			UIManager.AddMessageToCombatLog("Invalid action selected. Press '1', '2', or '3' to choose an action.");
-			break;
-		}
-
-		if (EnemyGladiator->isDead)
-		{
-			EndCombat();
-			return true;
-		}
-		
+		UIManager.AddMessageToCombatLog("Invalid action selected. Press '1', '2', or '3' to choose an action.");
 		UpdateInterface();
+		SelectedAction = Controller->DecideAction();
 	}
 
+	Actions.ExecuteAction(SelectedAction, *PlayerGladiator, *EnemyGladiator);
+
+	if (EnemyGladiator->isDead)
+	{
+		EndCombat();
+		return true;
+	}
+
+	UpdateInterface();
 	return false;
 }
 
@@ -80,23 +67,9 @@ bool CombatManager::StartEnemyTurn()
 {
 	UpdateDecisionParameters();
 
-	EnemyActionOptions SelectedAction = EnemyAI.DecideAction(EnemyDecisionParameters);
+	ActionTypes SelectedAction = EnemyAI.DecideAction(EnemyDecisionParameters);
 
-	switch (SelectedAction)
-	{
-	case EnemyActionOptions::Attack:
-		Actions.Attack(*PlayerGladiator, *EnemyGladiator);
-		break;
-	case EnemyActionOptions::Dodge:
-		Actions.Dodge(*EnemyGladiator);
-		break;
-	case EnemyActionOptions::Heal:
-		Actions.Heal( *EnemyGladiator);
-		break;
-	default:
-		UIManager.AddMessageToCombatLog("Invalid action selected.");
-		break;
-	}
+	Actions.ExecuteAction(SelectedAction, *EnemyGladiator, *PlayerGladiator);
 
 	if (PlayerGladiator->isDead)
 	{

@@ -1,12 +1,9 @@
 #pragma once
 #include "RandomGenerator.h"
+#include "ActionTypes.h"
 
-enum class EnemyActionOptions
-{
-	Attack,
-	Dodge,
-	Heal
-};
+//enum class ActionTypes : int;
+class CombatActions;
 
 struct DecisionParameters
 {
@@ -40,5 +37,5 @@ public:
 	float CalculateDodgeScore(DecisionParameters& DecisionParameters);
 	float CalculateHealScore(DecisionParameters& DecisionParameters);
 	float AddRandomnessToScore(float Score, DecisionParameters& DecisionParameters);
-	EnemyActionOptions DecideAction(DecisionParameters& DecisionParameters);
+	ActionTypes DecideAction(DecisionParameters& DecisionParameters);
 };
