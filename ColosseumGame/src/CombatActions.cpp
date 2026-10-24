@@ -8,7 +8,7 @@ void CombatActions::Attack(Gladiator& Target, Gladiator& Player)
 		return;
 	}
 	
-	int Strength = Player.Strength;
+	int Strength = Player.Stats.Strength;
 
 	int DamageAmount = RandomGen.GenerateRandomInt(Strength, Strength + (Strength / 2));
 
@@ -24,7 +24,7 @@ void CombatActions::Attack(Gladiator& Target, Gladiator& Player)
 
 void CombatActions::Dodge(Gladiator& Player)
 {
-	int Agility = Player.Agility;
+	int Agility = Player.Stats.Agility;
 
 	Player.IsDodging = true;
 
@@ -33,7 +33,7 @@ void CombatActions::Dodge(Gladiator& Player)
 
 void CombatActions::Heal(Gladiator& Player)
 {
-	int Recovery = Player.Recovery;
+	int Recovery = Player.Stats.Recovery;
 
 	int HealAmount = RandomGen.GenerateRandomInt(Recovery, Recovery + (Recovery / 2));
 
@@ -46,7 +46,7 @@ void CombatActions::Heal(Gladiator& Player)
 
 bool CombatActions::CheckCrit(Gladiator& Player)
 {
-	int Luck = Player.Luck;
+	int Luck = Player.Stats.Luck;
 	Player.CritChance = (Luck * 5) / 2;
 
 	if (Player.IsCounterattacking)
@@ -69,7 +69,7 @@ bool CombatActions::CheckCrit(Gladiator& Player)
 
 bool CombatActions::CheckDodge(Gladiator& Target)
 {
-	int Agility = Target.Agility;
+	int Agility = Target.Stats.Agility;
 	Target.DodgeChance = (Agility * 5) / 2;
 
 	if (Target.IsDodging)

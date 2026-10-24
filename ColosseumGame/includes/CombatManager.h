@@ -40,8 +40,8 @@ public:
 
 	// UI Functions
 
-	void SetUpInterface();
-	void UpdateInterface();
+	void SetUpCombatInterface();
+	void UpdateCombatInterface();
 
 	// AI Behavior Parameters
 

@@ -48,6 +48,7 @@ public:
 
 	void DisplayStartMenu();
 	void DisplayStoryScreen(const std::string& PlayerName);
+	void DisplayUpgradeScreen(int Points, ConsoleData& Stats);
 	void DisplayGameOverMenu();
 
 };

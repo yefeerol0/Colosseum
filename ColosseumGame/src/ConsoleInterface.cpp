@@ -112,6 +112,11 @@ void ConsoleInterface::DisplayStoryScreen(const std::string& PlayerName)
 
 }
 
+void ConsoleInterface::DisplayUpgradeScreen(int Points, ConsoleData& Stats)
+{
+	cout << "\x1b[Available Points:\x1b[0m\n" + Points << endl;
+}
+
 void ConsoleInterface::DisplayGameOverMenu()
 {
 	ClearConsole();

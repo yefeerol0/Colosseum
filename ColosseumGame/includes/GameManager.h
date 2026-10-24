@@ -25,15 +25,25 @@ private:
 
 	// GAME START
 
-	void DisplayWelcomeText();
 	void WaitForStartInput();
 	void AskForPlayerName();
+	
+	// UPGRADE SYSTEM
+
+	void StartUpgradePhase(int UpgradePoints);
+
+	int StartPoints = 15; // Upgrade points given at the start of game.
+	int RewardPoints = 3; // Upgrade points given after each combat won.
+
+	// UPGRADE UI
+
+	void SetUpUpgradeInterface();
+	void UpdateUpgradeInterface();
 
 	// GAME LOOP
 
 	void ManageCombatLoop();
 	void SpawnEnemy();
-	void StartUpgradeSequence();
 	void GameOver();
 
 public:

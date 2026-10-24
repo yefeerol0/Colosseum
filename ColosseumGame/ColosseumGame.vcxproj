@@ -137,6 +137,7 @@
     <ClInclude Include="includes\GladiatorDataLoader.h" />
     <ClInclude Include="includes\PlayerController.h" />
     <ClInclude Include="includes\RandomGenerator.h" />
+    <ClInclude Include="includes\StatTypes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CombatActions.cpp" />

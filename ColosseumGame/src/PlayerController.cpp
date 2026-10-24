@@ -47,3 +47,24 @@ ActionTypes PlayerController::DecideAction()
 		return ActionTypes::Invalid;
 	}
 }
+
+StatTypes PlayerController::SelectStat()
+{
+	char stat = _getch();
+
+	switch(stat)
+	{
+	case '1':
+		return StatTypes::Vitality;
+	case '2':
+		return StatTypes::Strength;
+	case '3':
+		return StatTypes::Luck;
+	case '4':
+		return StatTypes::Agility;
+	case '5':
+		return StatTypes::Recovery;
+	default:
+		return StatTypes::Invalid;
+	}
+}

@@ -16,7 +16,7 @@ CombatResult CombatManager::StartCombat(PlayerController& InController, Gladiato
 	EnemyGladiator->InitializeHealth();
 
 	CacheDecisionParameters();
-	SetUpInterface();
+	UpdateCombatInterface();
 
 	while (true)
 	{
@@ -37,7 +37,7 @@ void CombatManager::EndCombat()
 	UIManager.ClearCombatLog();
 	Actions.LogsToBeAdded.clear();
 	UIManager.AddMessageToCombatLog("The battle is over!");
-	UpdateInterface();
+	UpdateCombatInterface();
 }
 
 bool CombatManager::StartPlayerTurn()
@@ -47,7 +47,7 @@ bool CombatManager::StartPlayerTurn()
 	while (SelectedAction == ActionTypes::Invalid)
 	{
 		UIManager.AddMessageToCombatLog("Invalid action selected. Press '1', '2', or '3' to choose an action.");
-		UpdateInterface();
+		UpdateCombatInterface();
 		SelectedAction = Controller->DecideAction();
 	}
 
@@ -59,7 +59,7 @@ bool CombatManager::StartPlayerTurn()
 		return true;
 	}
 
-	UpdateInterface();
+	UpdateCombatInterface();
 	return false;
 }
 
@@ -77,11 +77,11 @@ bool CombatManager::StartEnemyTurn()
 		return true;
 	}
 
-	UpdateInterface();
+	UpdateCombatInterface();
 	return false;
 }
 
-void CombatManager::SetUpInterface()
+void CombatManager::SetUpCombatInterface()
 {
 	ConsoleData UIData;
 
@@ -96,24 +96,24 @@ void CombatManager::SetUpInterface()
 	UIManager.DisplayCombatHUD(UIData);
 }
 
-void CombatManager::UpdateInterface()
+void CombatManager::UpdateCombatInterface()
 {
 	for (const std::string& Log : Actions.ForwardCombatLogs())
 	{
 		UIManager.AddMessageToCombatLog(Log);
 	}
 
-	SetUpInterface();
+	SetUpCombatInterface();
 }
 
 void CombatManager::CacheDecisionParameters()
 {
 	EnemyDecisionParameters.SelfMaxHealth = EnemyGladiator->MaxHealthPoints;
 	EnemyDecisionParameters.PlayerMaxHealth = PlayerGladiator->MaxHealthPoints;
-	EnemyDecisionParameters.StrengthStat = EnemyGladiator->Strength;
-	EnemyDecisionParameters.LuckStat = EnemyGladiator->Luck;
-	EnemyDecisionParameters.AgilityStat = EnemyGladiator->Agility;
-	EnemyDecisionParameters.RecoveryStat = EnemyGladiator->Recovery;
+	EnemyDecisionParameters.StrengthStat = EnemyGladiator->Stats.Strength;
+	EnemyDecisionParameters.LuckStat = EnemyGladiator->Stats.Luck;
+	EnemyDecisionParameters.AgilityStat = EnemyGladiator->Stats.Agility;
+	EnemyDecisionParameters.RecoveryStat = EnemyGladiator->Stats.Recovery;
 	EnemyDecisionParameters.Unpredictability = EnemyGladiator->EnemyUnpredictability;
 }
 

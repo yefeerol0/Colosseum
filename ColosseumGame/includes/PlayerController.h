@@ -1,5 +1,6 @@
 #pragma once
 #include "ActionTypes.h"
+#include "StatTypes.h"
 #include <string>
 
 class Gladiator;
@@ -16,4 +17,5 @@ public:
 	void PressAnyKey();
     std::string EnterName();
 	ActionTypes DecideAction();
+	StatTypes SelectStat();
 };

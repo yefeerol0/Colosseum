@@ -24,11 +24,11 @@ void GladiatorDataLoader::LoadFromFile()
         Gladiator gladiator;
 
         gladiator.Name = enemy.at("Name").get<std::string>();
-        gladiator.Vitality = enemy.at("Vitality").get<int>();
-        gladiator.Strength = enemy.at("Strength").get<int>();
-        gladiator.Luck = enemy.at("Luck").get<int>();
-        gladiator.Agility = enemy.at("Agility").get<int>();
-        gladiator.Recovery = enemy.at("Recovery").get<int>();
+        gladiator.Stats.Vitality = enemy.at("Vitality").get<int>();
+        gladiator.Stats.Strength = enemy.at("Strength").get<int>();
+        gladiator.Stats.Luck = enemy.at("Luck").get<int>();
+        gladiator.Stats.Agility = enemy.at("Agility").get<int>();
+        gladiator.Stats.Recovery = enemy.at("Recovery").get<int>();
 
         GladiatorEnemies[index] = gladiator;
         index++;

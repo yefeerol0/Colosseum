@@ -24,12 +24,7 @@ void GameManager::StartGame()
 	UIManager->DisplayStartMenu();
 	Controller->PressAnyKey();
 	AskForPlayerName();
-	ManageCombatLoop();
-}
-
-void GameManager::DisplayWelcomeText()
-{
-	cout << "Welcome to the Colosseum!" << endl;
+	StartUpgradePhase(StartPoints);
 }
 
 void GameManager::AskForPlayerName()
@@ -39,13 +34,33 @@ void GameManager::AskForPlayerName()
 	cout << name << ", Welcome to the Colosseum!" << endl;
 }
 
+void GameManager::StartUpgradePhase(int UpgradePoints)
+{
+	int AvailablePoints = UpgradePoints;
+
+	StatTypes SelectedStat = Controller->SelectStat();
+
+	while (AvailablePoints > 0)
+	{
+		while (SelectedStat == StatTypes::Invalid)
+		{
+			SelectedStat = Controller->SelectStat();
+		}
+
+		AvailablePoints--;
+	}
+
+	ManageCombatLoop();
+
+}
+
 void GameManager::ManageCombatLoop()
 {
 	StageNumber++;
 	SpawnEnemy();
 
 	CombatResult Result = CombatProcessor->StartCombat(*Controller, *CurrentEnemy, StageNumber);
-	
+
 	if (Result == CombatResult::PlayerLost)
 	{
 		GameOver();
@@ -53,15 +68,8 @@ void GameManager::ManageCombatLoop()
 	}
 	else
 	{
-		StartUpgradeSequence();
+		StartUpgradePhase(RewardPoints);
 	}
-}
-
-void GameManager::StartUpgradeSequence()
-{
-	ManageCombatLoop();
-
-	// This section is yet to be completed.
 }
 
 void GameManager::SpawnEnemy()

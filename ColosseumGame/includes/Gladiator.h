@@ -1,5 +1,17 @@
 #pragma once
+#include "StatTypes.h"
 #include <string>
+
+struct UpgradeableStats
+{
+	// Stats
+
+	int Vitality = 5; // Health points
+	int Strength = 4; // Damage
+	int Luck = 1; // Chance to crit
+	int Agility = 1; // Chance to dodge
+	int Recovery = 1; // Amount to heal
+};
 
 struct Gladiator
 {
@@ -17,13 +29,7 @@ struct Gladiator
 	bool IsDodging = false;
 	bool IsCounterattacking = false;
 
-	// Stats
-
-	int Vitality = 5; // Health points
-	int Strength = 4; // Damage
-	int Luck = 1; // Chance to crit
-	int Agility = 1; // Chance to dodge
-	int Recovery = 1; // Amount to heal
+	UpgradeableStats Stats;
 
 	// AI Behavior
 
@@ -35,4 +41,5 @@ struct Gladiator
 	void TakeDamage(int DamageAmount);
 	void RestoreHealth(int HealAmount);
 	bool CheckIfDead();
+	void UpgradeStat(StatTypes Stat);
 };

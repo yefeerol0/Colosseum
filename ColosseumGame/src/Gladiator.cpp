@@ -5,7 +5,7 @@ void Gladiator::InitializeHealth()
 	// Is called at "Combat Start"
 
 	isDead = false;
-	MaxHealthPoints = Vitality * 10;
+	MaxHealthPoints = Stats.Vitality * 10;
 	HealthPoints = MaxHealthPoints;
 
 }
@@ -36,5 +36,17 @@ bool Gladiator::CheckIfDead()
 	else
 	{
 		return false;
+	}
+}
+
+void Gladiator::UpgradeStat(StatTypes Stat)
+{
+	switch (Stat)
+	{
+	case StatTypes::Vitality: Stats.Vitality++; break;
+	case StatTypes::Strength: Stats.Strength++; break;
+	case StatTypes::Luck:     Stats.Luck++;     break;
+	case StatTypes::Agility:  Stats.Agility++;  break;
+	case StatTypes::Recovery: Stats.Recovery++; break;
 	}
 }
