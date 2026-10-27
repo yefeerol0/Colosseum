@@ -112,9 +112,16 @@ void ConsoleInterface::DisplayStoryScreen(const std::string& PlayerName)
 
 }
 
-void ConsoleInterface::DisplayUpgradeScreen(int Points, ConsoleData& Stats)
+void ConsoleInterface::DisplayUpgradeScreen(UpgradeData& UIData)
 {
-	cout << "\x1b[Available Points:\x1b[0m\n" + Points << endl;
+	ClearConsole();
+
+	cout << "Available Points: " + to_string(UIData.AvailablePoints) + "\n" << endl;
+	cout << "Vitality: " + to_string(UIData.Vitality) << endl;
+	cout << "Strength: " + to_string(UIData.Strength) << endl;
+	cout << "Luck: " + to_string(UIData.Luck) << endl;
+	cout << "Agility: " + to_string(UIData.Agility) << endl;
+	cout << "Recovery: " + to_string(UIData.Recovery) << endl;
 }
 
 void ConsoleInterface::DisplayGameOverMenu()

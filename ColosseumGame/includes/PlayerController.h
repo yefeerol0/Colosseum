@@ -3,6 +3,7 @@
 #include "StatTypes.h"
 #include <string>
 
+struct UpgradeData;
 class Gladiator;
 
 class PlayerController
@@ -16,6 +17,13 @@ public:
 
 	void PressAnyKey();
     std::string EnterName();
+
+	// Combat
+
 	ActionTypes DecideAction();
+
+	// Upgrade System
+
 	StatTypes SelectStat();
+	void ApplyUpgrade(StatTypes Stat);
 };

@@ -1,4 +1,5 @@
 #include "Gladiator.h"
+#include <iostream>
 
 void Gladiator::InitializeHealth()
 {

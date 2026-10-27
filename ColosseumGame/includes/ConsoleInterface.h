@@ -13,6 +13,16 @@ struct ConsoleData
 	int EnemyMaxHealth = 0;
 };
 
+struct UpgradeData
+{
+	int AvailablePoints = 0;
+	int Vitality = 0;
+	int Strength = 0;
+	int Luck = 0;
+	int Agility = 0;
+	int Recovery = 0;
+};
+
 class ConsoleInterface
 {
 private:
@@ -37,7 +47,6 @@ private:
 	void PrintCombatLog();
 	void PrintActionOptions();
 
-
 public:
 
 	void ClearCombatLog();
@@ -48,7 +57,7 @@ public:
 
 	void DisplayStartMenu();
 	void DisplayStoryScreen(const std::string& PlayerName);
-	void DisplayUpgradeScreen(int Points, ConsoleData& Stats);
+	void DisplayUpgradeScreen(UpgradeData& UIData);
 	void DisplayGameOverMenu();
 
 };

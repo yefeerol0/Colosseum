@@ -138,6 +138,7 @@
     <ClInclude Include="includes\PlayerController.h" />
     <ClInclude Include="includes\RandomGenerator.h" />
     <ClInclude Include="includes\StatTypes.h" />
+    <ClInclude Include="includes\UpgradeSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CombatActions.cpp" />
@@ -150,6 +151,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\PlayerController.cpp" />
     <ClCompile Include="src\RandomGenerator.cpp" />
+    <ClCompile Include="src\UpgradeSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\Enemies.json" />

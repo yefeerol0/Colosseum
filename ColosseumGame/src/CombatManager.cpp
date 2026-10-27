@@ -3,13 +3,11 @@
 #include "Gladiator.h"
 #include "ConsoleInterface.h"
 
-CombatResult CombatManager::StartCombat(PlayerController& InController, Gladiator& Enemy, int InputStageNumber)
+CombatResult CombatManager::StartCombat(Gladiator& Enemy, int InputStageNumber)
 {
 	LocalStageNumber = InputStageNumber;
 
-	Controller = &InController;
-
-	PlayerGladiator = Controller->PlayerGladiator;
+	PlayerGladiator = Controller.PlayerGladiator;
 	EnemyGladiator = &Enemy;
 
 	PlayerGladiator->InitializeHealth();
@@ -42,13 +40,13 @@ void CombatManager::EndCombat()
 
 bool CombatManager::StartPlayerTurn()
 {
-	ActionTypes SelectedAction = Controller->DecideAction();
+	ActionTypes SelectedAction = Controller.DecideAction();
 
 	while (SelectedAction == ActionTypes::Invalid)
 	{
 		UIManager.AddMessageToCombatLog("Invalid action selected. Press '1', '2', or '3' to choose an action.");
 		UpdateCombatInterface();
-		SelectedAction = Controller->DecideAction();
+		SelectedAction = Controller.DecideAction();
 	}
 
 	Actions.ExecuteAction(SelectedAction, *PlayerGladiator, *EnemyGladiator);

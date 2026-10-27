@@ -2,6 +2,7 @@
 #include "StatTypes.h"
 #include <string>
 
+
 struct UpgradeableStats
 {
 	// Stats

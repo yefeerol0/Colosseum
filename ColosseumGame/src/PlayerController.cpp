@@ -68,3 +68,10 @@ StatTypes PlayerController::SelectStat()
 		return StatTypes::Invalid;
 	}
 }
+
+void PlayerController::ApplyUpgrade(StatTypes Stat) 
+{
+	PlayerGladiator->UpgradeStat(Stat);
+
+	// This function is a wrapper to remove the need of UpgradeSystem.cpp knowing about Gladiator.h.
+}

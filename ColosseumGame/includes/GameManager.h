@@ -5,6 +5,7 @@ class PlayerController;
 class GladiatorDataLoader;
 class ConsoleInterface;
 class CombatManager;
+class UpgradeSystem;
 
 struct Gladiator;
 
@@ -22,6 +23,7 @@ private:
 	std::unique_ptr<ConsoleInterface> UIManager;
 	std::unique_ptr<CombatManager> CombatProcessor;
 	std::unique_ptr<Gladiator> CurrentEnemy;
+	std::unique_ptr<UpgradeSystem> UpgradeManager;
 
 	// GAME START
 
@@ -35,10 +37,6 @@ private:
 	int StartPoints = 15; // Upgrade points given at the start of game.
 	int RewardPoints = 3; // Upgrade points given after each combat won.
 
-	// UPGRADE UI
-
-	void SetUpUpgradeInterface();
-	void UpdateUpgradeInterface();
 
 	// GAME LOOP
 

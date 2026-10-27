@@ -5,7 +5,6 @@
 class PlayerController;
 class Gladiator;
 class ConsoleInterface;
-class EnemyBehavior;
 
 enum class CombatResult
 {
@@ -16,11 +15,10 @@ enum class CombatResult
 class CombatManager
 {
 private:
-
-	PlayerController* Controller = nullptr;
 	Gladiator* PlayerGladiator = nullptr;
 	Gladiator* EnemyGladiator = nullptr;
 	CombatActions Actions;
+	PlayerController& Controller;
 	ConsoleInterface& UIManager;
 	EnemyBehavior EnemyAI{};
 
@@ -28,11 +26,12 @@ private:
 
 public:
 
-	CombatManager(ConsoleInterface& InConsole) : UIManager(InConsole) {}
+	CombatManager(ConsoleInterface& InConsole, PlayerController& InController)
+		: UIManager(InConsole), Controller(InController) {}
 
 	// Combat Management
 	
-	CombatResult StartCombat(PlayerController& InController, Gladiator& Enemy, int InputStageNumber);
+	CombatResult StartCombat(Gladiator& Enemy, int InputStageNumber);
 	void EndCombat();
 
 	bool StartPlayerTurn();
