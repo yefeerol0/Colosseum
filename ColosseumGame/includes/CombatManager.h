@@ -15,11 +15,14 @@ enum class CombatResult
 class CombatManager
 {
 private:
+
 	Gladiator* PlayerGladiator = nullptr;
 	Gladiator* EnemyGladiator = nullptr;
-	CombatActions Actions;
+
 	PlayerController& Controller;
 	ConsoleInterface& UIManager;
+
+	CombatActions Actions;
 	EnemyBehavior EnemyAI{};
 
 	int LocalStageNumber = 0; // This variable copies the stage number from GameManager.

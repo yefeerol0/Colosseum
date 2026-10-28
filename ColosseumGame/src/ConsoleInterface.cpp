@@ -5,7 +5,7 @@ using namespace std;
 
 void ConsoleInterface::ClearConsole()
 {
-	cout << "\033[3J\033[2J\033[H" << flush;
+	cout << "\033[3J\033[2J\033[H";
 
 	// An ANSI escape sequence. Previously, I was using system("cls") which was only for Windows, but this works on other systems as well.
 }
@@ -22,24 +22,24 @@ void ConsoleInterface::PrintTitle()
 ##    ## ##    ## ##       ##    ## ##    ## ##    ## ##       ##    ## ##     ##
  ######   ######  ########  ######   ######   ######  ########  ######  ##     ##
                                                                               
-	)ASCII" << std::endl;
+	)ASCII" << "\n";
 }
 
 void ConsoleInterface::PrintProgression(int StageNumber)
 {
-    cout << "Stage: " << StageNumber << "/20" << endl;
+    cout << "Stage: " << StageNumber << "/20 \n";
 }
 
 void ConsoleInterface::PrintGladiatorNames(const std::string& PlayerName, const std::string& EnemyName)
 {
-	cout << left << setw(20) << "PLAYER" << "ENEMY" << endl;
-	cout << left << setw(20) << PlayerName << EnemyName << endl;
+	cout << left << setw(20) << "PLAYER" << "ENEMY \n";
+	cout << left << setw(20) << PlayerName << EnemyName + "\n";
 }
 
 void ConsoleInterface::PrintHealthBars(int PlayerHealth, int PlayerMaxHealth, int EnemyHealth, int EnemyMaxHealth)
 {
 	cout << left << setw(20) << ("HP: " + to_string(PlayerHealth) + "/" + to_string(PlayerMaxHealth)) 
-	<< "HP: " << EnemyHealth << "/" << EnemyMaxHealth << endl;
+	<< "HP: " << EnemyHealth << "/" << EnemyMaxHealth + "\n";
 
 	// "setw()" adds weight to the left side of the string. Same result would be possible without using any to_strings and 
 	// placing setw() between "/" and "PlayerMaxHealth", but it would be less readable and more complicated to understand.
@@ -58,23 +58,23 @@ void ConsoleInterface::AddMessageToCombatLog(const std::string& LogMessage)
 
 void ConsoleInterface::PrintCombatLog()
 {
-	cout << "Combat Log: " << endl;
+	cout << "Combat Log: \n";
 
-	for (int i = CombatLogLines.size(); i < MaxLogLines; ++i)
+	for (size_t i = CombatLogLines.size(); i < MaxLogLines; ++i)
 	{
-		cout << endl;
+		cout << "\n";
 	}
 
 	for (const string& LogLine : CombatLogLines)
 	{
-		cout << LogLine << endl;
+		cout << LogLine + "\n";
 	}
 }
 
 void ConsoleInterface::PrintActionOptions()
 {
-	cout << "Choose your next action:" << endl;
-	cout << left << setw(12) << "{1} Attack" << setw(12) << "{2} Dodge" << setw(14) << "{3} Heal" << endl;
+	cout << "Choose your next action: \n";
+	cout << left << setw(12) << "{1} Attack" << setw(12) << "{2} Dodge" << setw(14) << "{3} Heal \n";
 }
 
 void ConsoleInterface::ClearCombatLog()
@@ -85,15 +85,15 @@ void ConsoleInterface::ClearCombatLog()
 void ConsoleInterface::DisplayCombatHUD(const ConsoleData& UIData)
 {
 	ClearConsole();
-	cout << "===========================================" << endl;
+	cout << "=========================================== \n";
 	PrintProgression(UIData.StageNumber);
-	cout << "===========================================" << endl;
+	cout << "=========================================== \n";
 	PrintGladiatorNames(UIData.PlayerName, UIData.EnemyName);
 	PrintHealthBars(UIData.PlayerHealth, UIData.PlayerMaxHealth, 
 					UIData.EnemyHealth, UIData.EnemyMaxHealth);
-	cout << "===========================================" << endl;
+	cout << "=========================================== \n";
 	PrintCombatLog();
-	cout << "===========================================" << endl;
+	cout << "=========================================== \n";
 	PrintActionOptions();	
 }
 
@@ -102,26 +102,39 @@ void ConsoleInterface::DisplayStartMenu()
 	ClearConsole();
 	PrintTitle();
 
-	cout << "Welcome to the Colosseum!" << endl;
-	cout << "\x1b[5mPress any key to start!\x1b[0m\n" << endl; // Another ANSI code for blinking text.
+	cout << "Welcome to the Colosseum! \n";
+	cout << "\x1b[5mPress any key to start!\x1b[0m \n"; // Another ANSI code for blinking text.
 
 }
 
-void ConsoleInterface::DisplayStoryScreen(const std::string& PlayerName)
-{
-
-}
-
-void ConsoleInterface::DisplayUpgradeScreen(UpgradeData& UIData)
+void ConsoleInterface::DisplayStoryScreen()
 {
 	ClearConsole();
 
-	cout << "Available Points: " + to_string(UIData.AvailablePoints) + "\n" << endl;
-	cout << "Vitality: " + to_string(UIData.Vitality) << endl;
-	cout << "Strength: " + to_string(UIData.Strength) << endl;
-	cout << "Luck: " + to_string(UIData.Luck) << endl;
-	cout << "Agility: " + to_string(UIData.Agility) << endl;
-	cout << "Recovery: " + to_string(UIData.Recovery) << endl;
+	cout << R"(
+	
+	You were once a free man. But now, freedom is the only thing you seek.
+	Since you are chained, you were preparing for the Grand Tournament.
+	When it all comes down to who will die and who will survive,
+	You are determined to reclaim your liberty and beat whoever comes your way.
+		 
+	Raise your sword, warrior. Your time has come!
+	
+	)" << "\n";
+
+	cout << "\x1b[5mEnter your Gladiator's name: \x1b[0m";
+}
+
+void ConsoleInterface::DisplayUpgradeScreen(const UpgradeData& UIData)
+{
+	ClearConsole();
+
+	cout << "Available Points: " + to_string(UIData.AvailablePoints) + "\n";
+	cout << "Vitality: " + to_string(UIData.Vitality) + "\n";
+	cout << "Strength: " + to_string(UIData.Strength) + "\n";
+	cout << "Luck: " + to_string(UIData.Luck) + "\n";
+	cout << "Agility: " + to_string(UIData.Agility) + "\n";
+	cout << "Recovery: " + to_string(UIData.Recovery) + "\n";
 }
 
 void ConsoleInterface::DisplayGameOverMenu()
@@ -129,6 +142,6 @@ void ConsoleInterface::DisplayGameOverMenu()
 	ClearConsole();
 	PrintTitle();
 
-	cout << "You lost!" << endl;
-	cout << "\x1b[5mPress any key to re-start!\x1b[0m\n" << endl;
+	cout << "You lost! \n";
+	cout << "\x1b[5mPress any key to re-start!\x1b[0m \n";
 }

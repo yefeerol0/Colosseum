@@ -4,7 +4,6 @@
 #include "ConsoleInterface.h"
 #include "CombatManager.h"
 #include "UpgradeSystem.h"
-#include <iostream>
 
 using namespace std;
 
@@ -25,15 +24,14 @@ void GameManager::StartGame()
 
 	UIManager->DisplayStartMenu();
 	Controller->PressAnyKey();
+	UIManager->DisplayStoryScreen();
 	AskForPlayerName();
 	StartUpgradePhase(StartPoints);
 }
 
 void GameManager::AskForPlayerName()
 {
-	cout << "Please enter your Gladiator's name: ";
 	string name = Controller->EnterName();
-	cout << name << ", Welcome to the Colosseum!" << endl;
 }
 
 void GameManager::StartUpgradePhase(int UpgradePoints)

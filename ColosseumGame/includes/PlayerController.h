@@ -2,6 +2,7 @@
 #include "ActionTypes.h"
 #include "StatTypes.h"
 #include <string>
+#include <memory>
 
 struct UpgradeData;
 class Gladiator;
@@ -11,9 +12,8 @@ class PlayerController
 public:
 
 	PlayerController();
-	~PlayerController();
 
-	Gladiator* PlayerGladiator;
+	std::unique_ptr<Gladiator> PlayerGladiator;
 
 	void PressAnyKey();
     std::string EnterName();

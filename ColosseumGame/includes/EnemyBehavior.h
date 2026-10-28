@@ -2,7 +2,6 @@
 #include "RandomGenerator.h"
 #include "ActionTypes.h"
 
-//enum class ActionTypes : int;
 class CombatActions;
 
 struct DecisionParameters
@@ -33,9 +32,9 @@ public:
 	
 	RandomGenerator RandomGen;
 
-	float CalculateAttackScore(DecisionParameters& DecisionParameters);
-	float CalculateDodgeScore(DecisionParameters& DecisionParameters);
-	float CalculateHealScore(DecisionParameters& DecisionParameters);
-	float AddRandomnessToScore(float Score, DecisionParameters& DecisionParameters);
-	ActionTypes DecideAction(DecisionParameters& DecisionParameters);
+	float CalculateAttackScore(const DecisionParameters& Params);
+	float CalculateDodgeScore(const DecisionParameters& Params);
+	float CalculateHealScore(const DecisionParameters& Params);
+	float AddRandomnessToScore(float Score, const DecisionParameters& Params);
+	ActionTypes DecideAction(const DecisionParameters& Params);
 };

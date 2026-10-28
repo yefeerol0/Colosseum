@@ -24,8 +24,6 @@ void CombatActions::Attack(Gladiator& Target, Gladiator& Player)
 
 void CombatActions::Dodge(Gladiator& Player)
 {
-	int Agility = Player.Stats.Agility;
-
 	Player.IsDodging = true;
 
 	GenerateCombatLog(Player.Name + " is preparing to dodge the next attack!");
@@ -51,7 +49,7 @@ bool CombatActions::CheckCrit(Gladiator& Player)
 
 	if (Player.IsCounterattacking)
 	{
-		Player.CritChance += 20;
+		Player.CritChance += CounterattackCritBonus;
 	}
 
 	int CritRoll = RandomGen.GenerateRandomInt(1, 100);
@@ -74,7 +72,7 @@ bool CombatActions::CheckDodge(Gladiator& Target)
 
 	if (Target.IsDodging)
 	{
-		Target.DodgeChance += 20;
+		Target.DodgeChance += DodgeActionBonus;
 	}
 
 	int DodgeRoll = RandomGen.GenerateRandomInt(1, 100);

@@ -1,45 +1,45 @@
 #include "EnemyBehavior.h"
 
-float EnemyBehavior::CalculateAttackScore(DecisionParameters& DecisionParameters)
+float EnemyBehavior::CalculateAttackScore(const DecisionParameters& Params)
 {
-	int PlayerHealthPercentage = (DecisionParameters.PlayerHealth * 100) / DecisionParameters.PlayerMaxHealth;	
+	int PlayerHealthPercentage = (Params.PlayerHealth * 100) / Params.PlayerMaxHealth;
 
-	float AttackScore = ((float)DecisionParameters.StrengthStat * 0.025f) + ((float)DecisionParameters.LuckStat * 0.025f);
+	float AttackScore = ((float)Params.StrengthStat * 0.025f) + ((float)Params.LuckStat * 0.025f);
 
 	if (PlayerHealthPercentage <= 20)
 	{
 		AttackScore += 0.5f; // Almost always attack if player health is below 20%.
 	}
 
-	if (DecisionParameters.isCounterattacking)
+	if (Params.isCounterattacking)
 	{
 		AttackScore += 0.4f; // Unless you are in critical condition, attack if it is a counterattack.
 	}
 
-	if (DecisionParameters.isPlayerDodging)
+	if (Params.isPlayerDodging)
 	{
 		AttackScore -= 0.3f;
 	}
 
-	AttackScore = AddRandomnessToScore(AttackScore, DecisionParameters);
+	AttackScore = AddRandomnessToScore(AttackScore, Params);
 
 	return AttackScore;
 }
 
-float EnemyBehavior::CalculateDodgeScore(DecisionParameters& DecisionParameters)
+float EnemyBehavior::CalculateDodgeScore(const DecisionParameters& Params)
 {
-	float DodgeScore = ((float)DecisionParameters.LuckStat * 0.025f) + ((float)DecisionParameters.AgilityStat * 0.025f);
+	float DodgeScore = ((float)Params.LuckStat * 0.025f) + ((float)Params.AgilityStat * 0.025f);
 
-	DodgeScore = AddRandomnessToScore(DodgeScore, DecisionParameters);
+	DodgeScore = AddRandomnessToScore(DodgeScore, Params);
 
 	return DodgeScore;
 }
 
-float EnemyBehavior::CalculateHealScore(DecisionParameters& DecisionParameters)
+float EnemyBehavior::CalculateHealScore(const DecisionParameters& Params)
 {
-	int HealthPercentage = (DecisionParameters.SelfHealth * 100) / DecisionParameters.SelfMaxHealth;
+	int HealthPercentage = (Params.SelfHealth * 100) / Params.SelfMaxHealth;
 
-	float HealScore = (0.5f - (float)HealthPercentage * 0.01f) + (float)DecisionParameters.RecoveryStat * 0.025f;
+	float HealScore = (0.5f - (float)HealthPercentage * 0.01f) + (float)Params.RecoveryStat * 0.025f;
 
 	if (HealthPercentage >= 75)
 	{
@@ -50,25 +50,25 @@ float EnemyBehavior::CalculateHealScore(DecisionParameters& DecisionParameters)
 		HealScore += 0.4f; // Almost always heal if health is below 20%.
 	}
 
-	HealScore = AddRandomnessToScore(HealScore, DecisionParameters);
+	HealScore = AddRandomnessToScore(HealScore, Params);
 
 	return HealScore;
 }
 
-float EnemyBehavior::AddRandomnessToScore(float Score, DecisionParameters& DecisionParameters)
+float EnemyBehavior::AddRandomnessToScore(float Score, const DecisionParameters& Params)
 {
-	float RandomnessAmount = DecisionParameters.Unpredictability;
+	float RandomnessAmount = Params.Unpredictability;
 
 	Score += RandomGen.GenerateRandomFloat(-RandomnessAmount, RandomnessAmount);
 
 	return Score;
 }
 
-ActionTypes EnemyBehavior::DecideAction(DecisionParameters& DecisionParameters)
+ActionTypes EnemyBehavior::DecideAction(const DecisionParameters& Params)
 {
-	float AttackScore = CalculateAttackScore(DecisionParameters);
-	float DodgeScore = CalculateDodgeScore(DecisionParameters);
-	float HealScore = CalculateHealScore(DecisionParameters);
+	float AttackScore = CalculateAttackScore(Params);
+	float DodgeScore = CalculateDodgeScore(Params);
+	float HealScore = CalculateHealScore(Params);
 
 	if (AttackScore >= DodgeScore && AttackScore >= HealScore)
 	{

@@ -56,8 +56,8 @@ public:
 	// Other Screens
 
 	void DisplayStartMenu();
-	void DisplayStoryScreen(const std::string& PlayerName);
-	void DisplayUpgradeScreen(UpgradeData& UIData);
+	void DisplayStoryScreen();
+	void DisplayUpgradeScreen(const UpgradeData& UIData);
 	void DisplayGameOverMenu();
 
 };

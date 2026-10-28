@@ -1,13 +1,13 @@
 #pragma once
 #include <memory>
 
+struct Gladiator;
+
 class PlayerController;
 class GladiatorDataLoader;
 class ConsoleInterface;
 class CombatManager;
 class UpgradeSystem;
-
-struct Gladiator;
 
 class GameManager
 {

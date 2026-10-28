@@ -16,6 +16,6 @@ public:
 
     GladiatorDataLoader();
     void LoadFromFile();
-    const Gladiator& GetEnemy(int stageNumber);
+    const Gladiator& GetEnemy(int StageNumber);
 
 };

@@ -1,14 +1,10 @@
 #include "Gladiator.h"
-#include <iostream>
 
 void Gladiator::InitializeHealth()
 {
-	// Is called at "Combat Start"
-
 	isDead = false;
 	MaxHealthPoints = Stats.Vitality * 10;
 	HealthPoints = MaxHealthPoints;
-
 }
 
 void Gladiator::TakeDamage(int DamageAmount)

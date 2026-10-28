@@ -6,12 +6,7 @@
 
 PlayerController::PlayerController()
 {
-	PlayerGladiator = new Gladiator();
-}
-
-PlayerController::~PlayerController()
-{
-	delete PlayerGladiator;
+	PlayerGladiator = std::make_unique<Gladiator>();
 }
 
 void PlayerController::PressAnyKey()

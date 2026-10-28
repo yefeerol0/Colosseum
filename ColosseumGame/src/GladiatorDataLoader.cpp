@@ -1,7 +1,6 @@
 #include "GladiatorDataLoader.h"
 #include "Gladiator.h"
 #include "json.hpp"
-#include <iostream>
 #include <fstream>
 
 using json = nlohmann::json;
@@ -38,7 +37,7 @@ void GladiatorDataLoader::LoadFromFile()
 	// However, I wrote the loop manually to learn how the conversion process works. 
 }
 
-const Gladiator& GladiatorDataLoader::GetEnemy(int stageNumber)
+const Gladiator& GladiatorDataLoader::GetEnemy(int StageNumber)
 {
-    return GladiatorEnemies[stageNumber - 1];
+    return GladiatorEnemies[StageNumber - 1];
 }

@@ -7,7 +7,7 @@ CombatResult CombatManager::StartCombat(Gladiator& Enemy, int InputStageNumber)
 {
 	LocalStageNumber = InputStageNumber;
 
-	PlayerGladiator = Controller.PlayerGladiator;
+	PlayerGladiator = Controller.PlayerGladiator.get();
 	EnemyGladiator = &Enemy;
 
 	PlayerGladiator->InitializeHealth();
