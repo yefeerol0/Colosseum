@@ -1,5 +1,6 @@
 #include "CombatActions.h"
 #include "Gladiator.h"
+#include <algorithm>
 
 void CombatActions::Attack(Gladiator& Target, Gladiator& Player)
 {
@@ -10,7 +11,7 @@ void CombatActions::Attack(Gladiator& Target, Gladiator& Player)
 	
 	int Strength = Player.Stats.Strength;
 
-	int DamageAmount = RandomGen.GenerateRandomInt(Strength, Strength + (Strength / 2));
+	int DamageAmount = RandomGen.GenerateRandomInt((Strength / 2), Strength);
 
 	if (CheckCrit(Player))
 	{
@@ -33,19 +34,24 @@ void CombatActions::Heal(Gladiator& Player)
 {
 	int Recovery = Player.Stats.Recovery;
 
-	int HealAmount = RandomGen.GenerateRandomInt(Recovery, Recovery + (Recovery / 2));
+	int HealAmount = RandomGen.GenerateRandomInt((Recovery / 2), Recovery);
 
 	Player.RestoreHealth(HealAmount);
 
 	GenerateCombatLog(Player.Name + " healed for " + std::to_string(HealAmount) + " health points.");
 }
 
-// CritChance and DodgeChance are 2.5% per point of Luck and Agility.
+// CritChance and DodgeChance are 4% per point of Luck and Agility.
 
 bool CombatActions::CheckCrit(Gladiator& Player)
 {
 	int Luck = Player.Stats.Luck;
-	Player.CritChance = (Luck * 5) / 2;
+	Player.CritChance = std::min(Luck * 4, 72);
+
+	if (Player.CritChance > 75)
+	{
+		Player.CritChance = 75;
+	}
 
 	if (Player.IsCounterattacking)
 	{
@@ -68,7 +74,7 @@ bool CombatActions::CheckCrit(Gladiator& Player)
 bool CombatActions::CheckDodge(Gladiator& Target)
 {
 	int Agility = Target.Stats.Agility;
-	Target.DodgeChance = (Agility * 5) / 2;
+	Target.DodgeChance = std::min(Agility * 4, 72);
 
 	if (Target.IsDodging)
 	{

@@ -33,13 +33,13 @@ void ConsoleInterface::PrintProgression(int StageNumber)
 void ConsoleInterface::PrintGladiatorNames(const std::string& PlayerName, const std::string& EnemyName)
 {
 	cout << left << setw(20) << "PLAYER" << "ENEMY \n";
-	cout << left << setw(20) << PlayerName << EnemyName + "\n";
+	cout << left << setw(20) << PlayerName << EnemyName << "\n";
 }
 
 void ConsoleInterface::PrintHealthBars(int PlayerHealth, int PlayerMaxHealth, int EnemyHealth, int EnemyMaxHealth)
 {
-	cout << left << setw(20) << ("HP: " + to_string(PlayerHealth) + "/" + to_string(PlayerMaxHealth)) 
-	<< "HP: " << EnemyHealth << "/" << EnemyMaxHealth + "\n";
+	cout << left << setw(20) << ("HP: " + to_string(PlayerHealth) + "/" + to_string(PlayerMaxHealth))
+		<< "HP: " << EnemyHealth << "/" << EnemyMaxHealth << "\n";
 
 	// "setw()" adds weight to the left side of the string. Same result would be possible without using any to_strings and 
 	// placing setw() between "/" and "PlayerMaxHealth", but it would be less readable and more complicated to understand.
@@ -85,6 +85,7 @@ void ConsoleInterface::ClearCombatLog()
 void ConsoleInterface::DisplayCombatHUD(const ConsoleData& UIData)
 {
 	ClearConsole();
+
 	cout << "=========================================== \n";
 	PrintProgression(UIData.StageNumber);
 	cout << "=========================================== \n";

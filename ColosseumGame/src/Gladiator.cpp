@@ -28,6 +28,7 @@ bool Gladiator::CheckIfDead()
 {
 	if (HealthPoints <= 0)
 	{
+		Stats = {}; // Resets all stats.
 		return true;
 	}
 	else
