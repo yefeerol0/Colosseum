@@ -42,7 +42,7 @@ void GameManager::StartUpgradePhase(int UpgradePoints)
 }
 
 void GameManager::ManageCombatLoop()
-{
+{	
 	StageNumber++;
 	SpawnEnemy();
 
@@ -55,7 +55,14 @@ void GameManager::ManageCombatLoop()
 	}
 	else
 	{
-		StartUpgradePhase(RewardPoints);
+		if (StageNumber < 20)
+		{
+			StartUpgradePhase(RewardPoints);
+		}
+		else
+		{
+			GameWon();
+		}
 	}
 }
 
@@ -67,6 +74,18 @@ void GameManager::SpawnEnemy()
 void GameManager::GameOver()
 {
 	UIManager->DisplayGameOverMenu();
+	ResetGame();
+}
+
+void GameManager::GameWon()
+{
+	UIManager->DisplayWinScreen();
+	ResetGame();
+}
+
+void GameManager::ResetGame()
+{
+	Controller->ResetStats();
 	Controller->PressAnyKey();
 	StartGame();
 }

@@ -5,15 +5,19 @@
 #include <memory>
 
 struct UpgradeData;
-class Gladiator;
+struct Gladiator;
 
 class PlayerController
 {
+
 public:
 
 	PlayerController();
+	~PlayerController();
 
 	std::unique_ptr<Gladiator> PlayerGladiator;
+
+	char GetKey();
 
 	void PressAnyKey();
     std::string EnterName();
@@ -26,4 +30,6 @@ public:
 
 	StatTypes SelectStat();
 	void ApplyUpgrade(StatTypes Stat);
+	UpgradeData GetUpgradeData(int AvailablePoints) const;
+	void ResetStats();
 };

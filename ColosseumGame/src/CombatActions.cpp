@@ -1,68 +1,69 @@
 #include "CombatActions.h"
 #include "Gladiator.h"
+#include "TextColors.h"
 #include <algorithm>
 
-void CombatActions::Attack(Gladiator& Target, Gladiator& Player)
+void CombatActions::Attack(Gladiator& Target, Gladiator& Instigator)
 {
 	if (CheckDodge(Target))
 	{
 		return;
 	}
 	
-	int Strength = Player.Stats.Strength;
+	int Strength = Instigator.Stats.Strength;
 
 	int DamageAmount = RandomGen.GenerateRandomInt((Strength / 2), Strength);
 
-	if (CheckCrit(Player))
+	if (CheckCrit(Instigator))
 	{
 		DamageAmount *= 2;
 	}
 
 	Target.TakeDamage(DamageAmount);
 
-	GenerateCombatLog(Player.Name + " attacked " + Target.Name + " for " + std::to_string(DamageAmount) + " damage.");
+	GenerateCombatLog(Instigator.Name + " attacked " + Target.Name + " for " + RED + std::to_string(DamageAmount) + " damage." + RESET);
 }
 
-void CombatActions::Dodge(Gladiator& Player)
+void CombatActions::Dodge(Gladiator& Instigator)
 {
-	Player.IsDodging = true;
+	Instigator.IsDodging = true;
 
-	GenerateCombatLog(Player.Name + " is preparing to dodge the next attack!");
+	GenerateCombatLog(Instigator.Name + " is preparing to" + BLUE + " dodge the next attack!" + RESET);
 }
 
-void CombatActions::Heal(Gladiator& Player)
+void CombatActions::Heal(Gladiator& Instigator)
 {
-	int Recovery = Player.Stats.Recovery;
+	int Recovery = Instigator.Stats.Recovery;
 
 	int HealAmount = RandomGen.GenerateRandomInt((Recovery / 2), Recovery);
 
-	Player.RestoreHealth(HealAmount);
+	Instigator.RestoreHealth(HealAmount);
 
-	GenerateCombatLog(Player.Name + " healed for " + std::to_string(HealAmount) + " health points.");
+	GenerateCombatLog(Instigator.Name + " healed for " + GREEN + std::to_string(HealAmount) + " health points." + RESET);
 }
 
 // CritChance and DodgeChance are 4% per point of Luck and Agility.
 
-bool CombatActions::CheckCrit(Gladiator& Player)
+bool CombatActions::CheckCrit(Gladiator& Instigator)
 {
-	int Luck = Player.Stats.Luck;
-	Player.CritChance = std::min(Luck * 4, 72);
+	int Luck = Instigator.Stats.Luck;
+	Instigator.CritChance = std::min(Luck * 4, 72);
 
-	if (Player.CritChance > 75)
+	if (Instigator.CritChance > 75)
 	{
-		Player.CritChance = 75;
+		Instigator.CritChance = 75;
 	}
 
-	if (Player.IsCounterattacking)
+	if (Instigator.IsCounterattacking)
 	{
-		Player.CritChance += CounterattackCritBonus;
+		Instigator.CritChance += CounterattackCritBonus;
 	}
 
 	int CritRoll = RandomGen.GenerateRandomInt(1, 100);
 
-	if (CritRoll <= Player.CritChance)
+	if (CritRoll <= Instigator.CritChance)
 	{
-		GenerateCombatLog(Player.Name + " landed a critical hit!");
+		GenerateCombatLog(Instigator.Name + " landed a" + ORANGE + " critical hit!" + RESET);
 		return true;
 	}
 	else
@@ -85,8 +86,8 @@ bool CombatActions::CheckDodge(Gladiator& Target)
 
 	if (DodgeRoll <= Target.DodgeChance)
 	{
-		GenerateCombatLog(Target.Name + " dodged the attack!");
-		GenerateCombatLog(Target.Name + " can now counterattack!");
+		GenerateCombatLog(Target.Name + BLUE + " dodged the attack!" + RESET);
+		GenerateCombatLog(Target.Name + ORANGE + " can now counterattack!" + RESET);
 		Target.IsCounterattacking = true;
 		return true;
 	}

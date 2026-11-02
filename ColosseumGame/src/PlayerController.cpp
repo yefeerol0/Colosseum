@@ -1,17 +1,31 @@
 #include "PlayerController.h"
 #include "Gladiator.h"
+#include "ConsoleInterface.h"
 #include "conio.h" // For _getch() function
 #include <iostream>
-
 
 PlayerController::PlayerController()
 {
 	PlayerGladiator = std::make_unique<Gladiator>();
 }
 
+PlayerController::~PlayerController() = default;
+
+char PlayerController::GetKey()
+{
+	char Key = _getch();
+
+	if (Key == 27) // Escape Key
+	{
+		exit(0);
+	}
+
+	return Key;
+}
+
 void PlayerController::PressAnyKey()
 {
-	(void)_getch();
+	(void)GetKey();
 
 	// Press any key does not use the pressed key at any point in code.
 	// However, compiler throws a warning since the returned value is not used.
@@ -28,7 +42,7 @@ std::string PlayerController::EnterName()
 
 ActionTypes PlayerController::DecideAction()
 {
-	char action = _getch();
+	char action = GetKey();
 
 	switch (action)
 	{
@@ -45,7 +59,7 @@ ActionTypes PlayerController::DecideAction()
 
 StatTypes PlayerController::SelectStat()
 {
-	char stat = _getch();
+	char stat = GetKey();
 
 	switch(stat)
 	{
@@ -69,4 +83,23 @@ void PlayerController::ApplyUpgrade(StatTypes Stat)
 	PlayerGladiator->UpgradeStat(Stat);
 
 	// This function is a wrapper to remove the need of UpgradeSystem.cpp knowing about Gladiator.h.
+}
+
+UpgradeData PlayerController::GetUpgradeData(int AvailablePoints) const
+{
+	UpgradeData UIData;
+
+	UIData.AvailablePoints = AvailablePoints;
+	UIData.Vitality = PlayerGladiator->Stats.Vitality;
+	UIData.Strength = PlayerGladiator->Stats.Strength;
+	UIData.Luck = PlayerGladiator->Stats.Luck;
+	UIData.Agility = PlayerGladiator->Stats.Agility;
+	UIData.Recovery = PlayerGladiator->Stats.Recovery;
+
+	return UIData;
+}
+
+void PlayerController::ResetStats()
+{
+	PlayerGladiator->Stats = {}; // Resets all stats.
 }

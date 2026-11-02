@@ -13,12 +13,12 @@ public:
 
 	RandomGenerator RandomGen;
 
-	void Attack(Gladiator& Target, Gladiator& Player);
-	void Dodge(Gladiator& Player);
-	void Heal(Gladiator& Player);
+	void Attack(Gladiator& Target, Gladiator& Instigator);
+	void Dodge(Gladiator& Instigator);
+	void Heal(Gladiator& Instigator);
 
-	bool CheckCrit(Gladiator& Player);
-	bool CheckDodge(Gladiator& Target);
+	bool CheckCrit(Gladiator& Instigator);
+	bool CheckDodge(Gladiator& Instigator);
 
 	const int CounterattackCritBonus = 20;
 	const int DodgeActionBonus = 20;

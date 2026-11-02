@@ -31,6 +31,7 @@ private:
 	int MaxLogLines = 8;
 
 	void ClearConsole();
+	void PrintSeperator();
 
 	// Menu Functions
 
@@ -59,5 +60,6 @@ public:
 	void DisplayStoryScreen();
 	void DisplayUpgradeScreen(const UpgradeData& UIData);
 	void DisplayGameOverMenu();
+	void DisplayWinScreen();
 
 };

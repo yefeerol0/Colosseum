@@ -138,6 +138,7 @@
     <ClInclude Include="includes\PlayerController.h" />
     <ClInclude Include="includes\RandomGenerator.h" />
     <ClInclude Include="includes\StatTypes.h" />
+    <ClInclude Include="includes\TextColors.h" />
     <ClInclude Include="includes\UpgradeSystem.h" />
   </ItemGroup>
   <ItemGroup>
