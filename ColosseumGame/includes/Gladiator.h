@@ -18,7 +18,7 @@ struct Gladiator
 {
 	// Core Values
 
-	bool isDead = false;
+	bool IsDead = false;
 
 	std::string Name = "Unknown";
 	int MaxHealthPoints = 0;
@@ -38,7 +38,7 @@ struct Gladiator
 
 	// Functions
 
-	void InitializeHealth();
+	void InitializeValues();
 	void TakeDamage(int DamageAmount);
 	void RestoreHealth(int HealAmount);
 	bool CheckIfDead();

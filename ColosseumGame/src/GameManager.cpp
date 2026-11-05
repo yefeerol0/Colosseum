@@ -25,13 +25,8 @@ void GameManager::StartGame()
 	UIManager->DisplayStartMenu();
 	Controller->PressAnyKey();
 	UIManager->DisplayStoryScreen();
-	AskForPlayerName();
+	Controller->EnterName();
 	StartUpgradePhase(StartPoints);
-}
-
-void GameManager::AskForPlayerName()
-{
-	string name = Controller->EnterName();
 }
 
 void GameManager::StartUpgradePhase(int UpgradePoints)

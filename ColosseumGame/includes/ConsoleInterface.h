@@ -31,7 +31,7 @@ private:
 	int MaxLogLines = 8;
 
 	void ClearConsole();
-	void PrintSeperator();
+	void PrintSeparator();
 
 	// Menu Functions
 

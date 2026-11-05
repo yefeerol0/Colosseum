@@ -1,17 +1,20 @@
 #include "Gladiator.h"
 
-void Gladiator::InitializeHealth()
+void Gladiator::InitializeValues()
 {
-	isDead = false;
+	IsDead = false;
 	MaxHealthPoints = Stats.Vitality * 10;
 	HealthPoints = MaxHealthPoints;
+
+	IsCounterattacking = false;
+	IsDodging = false;
 }
 
 void Gladiator::TakeDamage(int DamageAmount)
 {
 	HealthPoints -= DamageAmount;
 
-	isDead = CheckIfDead();
+	IsDead = CheckIfDead();
 }
 
 void Gladiator::RestoreHealth(int HealAmount)

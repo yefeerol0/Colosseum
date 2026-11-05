@@ -6,7 +6,7 @@ int RandomGenerator::GenerateRandomInt(int min, int max)
     return dist(GetRng());
 }
 
-int RandomGenerator::GenerateRandomFloat(float min, float max)
+float RandomGenerator::GenerateRandomFloat(float min, float max)
 {
     std::uniform_real_distribution<float> dist(min, max);
     return dist(GetRng());

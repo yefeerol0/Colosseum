@@ -11,9 +11,9 @@ PlayerController::PlayerController()
 
 PlayerController::~PlayerController() = default;
 
-char PlayerController::GetKey()
+int PlayerController::GetKey()
 {
-	char Key = _getch();
+	int Key = _getch();
 
 	if (Key == 27) // Escape Key
 	{
@@ -42,7 +42,7 @@ std::string PlayerController::EnterName()
 
 ActionTypes PlayerController::DecideAction()
 {
-	char action = GetKey();
+	int action = GetKey();
 
 	switch (action)
 	{
@@ -59,7 +59,7 @@ ActionTypes PlayerController::DecideAction()
 
 StatTypes PlayerController::SelectStat()
 {
-	char stat = GetKey();
+	int stat = GetKey();
 
 	switch(stat)
 	{

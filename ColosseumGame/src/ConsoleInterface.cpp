@@ -9,10 +9,10 @@ void ConsoleInterface::ClearConsole()
 {
 	cout << "\033[3J\033[2J\033[H";
 
-	// An ANSI escape sequence. Previously, I was using system("cls") which was only for Windows, but this works on other systems as well.
+	// An ANSI escape sequence. Previously, I was using system("cls"), but this works as well.
 }
 
-void ConsoleInterface::PrintSeperator()
+void ConsoleInterface::PrintSeparator()
 {
 	cout << GRAY << "=========================================== \n" << RESET;
 }
@@ -93,21 +93,21 @@ void ConsoleInterface::DisplayCombatHUD(const ConsoleData& UIData)
 {
 	ClearConsole();
 
-	PrintSeperator(); //-----
+	PrintSeparator(); //-----
 
 	PrintProgression(UIData.StageNumber);
 
-	PrintSeperator(); //-----
+	PrintSeparator(); //-----
 
 	PrintGladiatorNames(UIData.PlayerName, UIData.EnemyName);
 	PrintHealthBars(UIData.PlayerHealth, UIData.PlayerMaxHealth, 
 					UIData.EnemyHealth, UIData.EnemyMaxHealth);
 
-	PrintSeperator(); //-----
+	PrintSeparator(); //-----
 
 	PrintCombatLog(); 
 
-	PrintSeperator(); //-----
+	PrintSeparator(); //-----
 
 	PrintActionOptions();	
 }
@@ -141,18 +141,18 @@ void ConsoleInterface::DisplayUpgradeScreen(const UpgradeData& UIData)
 {
 	ClearConsole();
 
-	PrintSeperator(); //-----
+	PrintSeparator(); //-----
 
 	cout << ITALIC << YELLOW << "Gladiator,it is time to power up!" << RESET << "\n";
 	cout << BOLD << YELLOW << "Available Points: " << WHITE << to_string(UIData.AvailablePoints) << RESET << "\n";
 
-	PrintSeperator(); //-----
+	PrintSeparator(); //-----
 
 	cout << GREEN << "{1} Vitality: " << WHITE << to_string(UIData.Vitality) << RESET << "\n";
-	cout << RED "{2} Strength: " << WHITE << to_string(UIData.Strength) << RESET << "\n";
-	cout << ORANGE "{3} Luck: " << WHITE << to_string(UIData.Luck) << RESET << "\n";
-	cout << BLUE "{4} Agility: " << WHITE << to_string(UIData.Agility) << RESET << "\n";
-	cout << LEAF "{5} Recovery: " << WHITE << to_string(UIData.Recovery) << RESET << "\n";
+	cout << RED << "{2} Strength: " << WHITE << to_string(UIData.Strength) << RESET << "\n";
+	cout << ORANGE << "{3} Luck: " << WHITE << to_string(UIData.Luck) << RESET << "\n";
+	cout << BLUE << "{4} Agility: " << WHITE << to_string(UIData.Agility) << RESET << "\n";
+	cout << LEAF << "{5} Recovery: " << WHITE << to_string(UIData.Recovery) << RESET << "\n";
 }
 
 void ConsoleInterface::DisplayGameOverMenu()

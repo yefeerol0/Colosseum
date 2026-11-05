@@ -6,7 +6,7 @@ class RandomGenerator
 public:
 
 	int GenerateRandomInt(int min, int max);
-	int GenerateRandomFloat(float min, float max);
+	float GenerateRandomFloat(float min, float max);
 
 private:
 

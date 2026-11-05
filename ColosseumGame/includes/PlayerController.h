@@ -17,7 +17,7 @@ public:
 
 	std::unique_ptr<Gladiator> PlayerGladiator;
 
-	char GetKey();
+	int GetKey();
 
 	void PressAnyKey();
     std::string EnterName();

@@ -24,11 +24,6 @@ private:
 	std::unique_ptr<CombatManager> CombatProcessor;
 	std::unique_ptr<Gladiator> CurrentEnemy;
 	std::unique_ptr<UpgradeSystem> UpgradeManager;
-
-	// GAME START
-
-	void WaitForStartInput();
-	void AskForPlayerName();
 	
 	// UPGRADE SYSTEM
 

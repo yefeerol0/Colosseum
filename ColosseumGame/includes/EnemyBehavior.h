@@ -16,14 +16,14 @@ struct DecisionParameters
 	int AgilityStat;
 	int RecoveryStat;
 
-	int Unpredictability;
+	float Unpredictability;
 
 	// Active Parameters
 
 	int SelfHealth;
 	int PlayerHealth;
-	bool isPlayerDodging;
-	bool isCounterattacking;
+	bool IsPlayerDodging;
+	bool IsCounterattacking;
 };
 
 class EnemyBehavior

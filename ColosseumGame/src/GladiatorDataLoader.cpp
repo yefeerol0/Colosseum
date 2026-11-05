@@ -28,6 +28,7 @@ void GladiatorDataLoader::LoadFromFile()
         gladiator.Stats.Luck = enemy.at("Luck").get<int>();
         gladiator.Stats.Agility = enemy.at("Agility").get<int>();
         gladiator.Stats.Recovery = enemy.at("Recovery").get<int>();
+		gladiator.EnemyUnpredictability = enemy.at("EnemyUnpredictability").get<float>();
 
         GladiatorEnemies[index] = gladiator;
         index++;

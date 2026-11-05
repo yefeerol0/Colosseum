@@ -10,8 +10,8 @@ CombatResult CombatManager::StartCombat(Gladiator& Enemy, int InputStageNumber)
 	PlayerGladiator = Controller.PlayerGladiator.get();
 	EnemyGladiator = &Enemy;
 
-	PlayerGladiator->InitializeHealth();
-	EnemyGladiator->InitializeHealth();
+	PlayerGladiator->InitializeValues();
+	EnemyGladiator->InitializeValues();
 
 	CacheDecisionParameters();
 	UpdateCombatInterface();
@@ -51,7 +51,7 @@ bool CombatManager::StartPlayerTurn()
 
 	Actions.ExecuteAction(SelectedAction, *PlayerGladiator, *EnemyGladiator);
 
-	if (EnemyGladiator->isDead)
+	if (EnemyGladiator->IsDead)
 	{
 		EndCombat();
 		return true;
@@ -69,7 +69,7 @@ bool CombatManager::StartEnemyTurn()
 
 	Actions.ExecuteAction(SelectedAction, *EnemyGladiator, *PlayerGladiator);
 
-	if (PlayerGladiator->isDead)
+	if (PlayerGladiator->IsDead)
 	{
 		EndCombat();
 		return true;
@@ -119,6 +119,6 @@ void CombatManager::UpdateDecisionParameters()
 {
 	EnemyDecisionParameters.SelfHealth = EnemyGladiator->HealthPoints;
 	EnemyDecisionParameters.PlayerHealth = PlayerGladiator->HealthPoints;
-	EnemyDecisionParameters.isPlayerDodging = PlayerGladiator->IsDodging;
-	EnemyDecisionParameters.isCounterattacking = EnemyGladiator->IsCounterattacking;
+	EnemyDecisionParameters.IsPlayerDodging = PlayerGladiator->IsDodging;
+	EnemyDecisionParameters.IsCounterattacking = EnemyGladiator->IsCounterattacking;
 }

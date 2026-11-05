@@ -49,14 +49,14 @@ bool CombatActions::CheckCrit(Gladiator& Instigator)
 	int Luck = Instigator.Stats.Luck;
 	Instigator.CritChance = std::min(Luck * 4, 72);
 
-	if (Instigator.CritChance > 75)
-	{
-		Instigator.CritChance = 75;
-	}
-
 	if (Instigator.IsCounterattacking)
 	{
 		Instigator.CritChance += CounterattackCritBonus;
+		Instigator.IsCounterattacking = false;
+
+		// The counterattack bonus only resets after attacking. Therefore, gladiators can save it for upcoming turns. 
+		// Also, the counterattack bonus is saved if the enemy dodges the attack. 
+		// The intention behind this was to avoid stalemate situations where gladiators keep dodging.
 	}
 
 	int CritRoll = RandomGen.GenerateRandomInt(1, 100);
@@ -80,6 +80,7 @@ bool CombatActions::CheckDodge(Gladiator& Target)
 	if (Target.IsDodging)
 	{
 		Target.DodgeChance += DodgeActionBonus;
+		Target.IsDodging = false;
 	}
 
 	int DodgeRoll = RandomGen.GenerateRandomInt(1, 100);

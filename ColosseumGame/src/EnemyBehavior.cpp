@@ -11,12 +11,12 @@ float EnemyBehavior::CalculateAttackScore(const DecisionParameters& Params)
 		AttackScore += 0.5f; // Almost always attack if player health is below 20%.
 	}
 
-	if (Params.isCounterattacking)
+	if (Params.IsCounterattacking)
 	{
 		AttackScore += 0.4f; // Unless you are in critical condition, attack if it is a counterattack.
 	}
 
-	if (Params.isPlayerDodging)
+	if (Params.IsPlayerDodging)
 	{
 		AttackScore -= 0.3f;
 	}
