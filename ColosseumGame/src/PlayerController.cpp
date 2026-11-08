@@ -1,7 +1,8 @@
 #include "PlayerController.h"
 #include "Gladiator.h"
 #include "ConsoleInterface.h"
-#include "conio.h" // For _getch() function
+#include <conio.h> // For _getch() function
+#include <cstdlib>
 #include <iostream>
 
 PlayerController::PlayerController()
@@ -17,10 +18,15 @@ int PlayerController::GetKey()
 
 	if (Key == 27) // Escape Key
 	{
-		exit(0);
+		std::exit(0);
 	}
 
 	return Key;
+}
+
+Gladiator& PlayerController::GetPlayerGladiator() const
+{
+	return *PlayerGladiator;
 }
 
 void PlayerController::PressAnyKey()

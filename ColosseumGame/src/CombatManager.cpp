@@ -7,7 +7,7 @@ CombatResult CombatManager::StartCombat(Gladiator& Enemy, int InputStageNumber)
 {
 	LocalStageNumber = InputStageNumber;
 
-	PlayerGladiator = Controller.PlayerGladiator.get();
+	PlayerGladiator = &Controller.GetPlayerGladiator();
 	EnemyGladiator = &Enemy;
 
 	PlayerGladiator->InitializeValues();
@@ -33,7 +33,7 @@ CombatResult CombatManager::StartCombat(Gladiator& Enemy, int InputStageNumber)
 void CombatManager::EndCombat()
 {
 	UIManager.ClearCombatLog();
-	Actions.LogsToBeAdded.clear();
+	Actions.ClearLogsToBeAdded();
 	UIManager.AddMessageToCombatLog("The battle is over!");
 	UpdateCombatInterface();
 }

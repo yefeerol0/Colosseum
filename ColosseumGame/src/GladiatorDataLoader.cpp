@@ -1,7 +1,7 @@
 #include "GladiatorDataLoader.h"
-#include "Gladiator.h"
 #include "json.hpp"
 #include <fstream>
+#include <stdexcept> // json.hpp apparently already includes this, but I added it to prevent confusion.
 
 using json = nlohmann::json;
 
@@ -16,6 +16,14 @@ void GladiatorDataLoader::LoadFromFile()
 
     json data = json::parse(enemyFile);
     
+	if (data.at("Enemies").size() != GladiatorEnemies.size())
+	{
+		throw std::runtime_error("The number of enemies in the JSON file is: " + 
+                                std::to_string(data.at("Enemies").size()) +
+                                " while the expected number is: " +
+                                std::to_string(GladiatorEnemies.size()));
+	}
+
     int index = 0;
 
     for (const nlohmann::json& enemy : data["Enemies"])
@@ -30,7 +38,7 @@ void GladiatorDataLoader::LoadFromFile()
         gladiator.Stats.Recovery = enemy.at("Recovery").get<int>();
 		gladiator.EnemyUnpredictability = enemy.at("EnemyUnpredictability").get<float>();
 
-        GladiatorEnemies[index] = gladiator;
+        GladiatorEnemies.at(index) = gladiator;
         index++;
     }
 
@@ -38,7 +46,7 @@ void GladiatorDataLoader::LoadFromFile()
 	// However, I wrote the loop manually to learn how the conversion process works. 
 }
 
-const Gladiator& GladiatorDataLoader::GetEnemy(int StageNumber)
+const Gladiator& GladiatorDataLoader::GetEnemy(int StageNumber) const
 {
-    return GladiatorEnemies[StageNumber - 1];
+    return GladiatorEnemies.at(StageNumber - 1);
 }

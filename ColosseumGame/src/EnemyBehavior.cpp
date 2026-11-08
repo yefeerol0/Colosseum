@@ -1,24 +1,26 @@
 #include "EnemyBehavior.h"
+#include "GameTuning.h"
+using namespace Tuning;
 
 float EnemyBehavior::CalculateAttackScore(const DecisionParameters& Params)
 {
 	int PlayerHealthPercentage = (Params.PlayerHealth * 100) / Params.PlayerMaxHealth;
 
-	float AttackScore = ((float)Params.StrengthStat * 0.025f) + ((float)Params.LuckStat * 0.025f);
+	float AttackScore = ((float)Params.StrengthStat * AS_StrengthRatio) + ((float)Params.LuckStat * AS_LuckRatio);
 
-	if (PlayerHealthPercentage <= 20)
+	if (PlayerHealthPercentage <= CriticalStatePercentage)
 	{
-		AttackScore += 0.5f; // Almost always attack if player health is below 20%.
+		AttackScore += AS_CriticalStateBonus; // Almost always attack if player health is in critical state.
 	}
 
 	if (Params.IsCounterattacking)
 	{
-		AttackScore += 0.4f; // Unless you are in critical condition, attack if it is a counterattack.
+		AttackScore += AS_CounterattackBonus; // Unless you are in critical condition, attack if it is a counterattack.
 	}
 
 	if (Params.IsPlayerDodging)
 	{
-		AttackScore -= 0.3f;
+		AttackScore -= AS_DodgePenalty;
 	}
 
 	AttackScore = AddRandomnessToScore(AttackScore, Params);
@@ -28,7 +30,7 @@ float EnemyBehavior::CalculateAttackScore(const DecisionParameters& Params)
 
 float EnemyBehavior::CalculateDodgeScore(const DecisionParameters& Params)
 {
-	float DodgeScore = ((float)Params.LuckStat * 0.025f) + ((float)Params.AgilityStat * 0.025f);
+	float DodgeScore = ((float)Params.LuckStat * DS_LuckRatio) + ((float)Params.AgilityStat * DS_AgilityRatio);
 
 	DodgeScore = AddRandomnessToScore(DodgeScore, Params);
 
@@ -39,15 +41,15 @@ float EnemyBehavior::CalculateHealScore(const DecisionParameters& Params)
 {
 	int HealthPercentage = (Params.SelfHealth * 100) / Params.SelfMaxHealth;
 
-	float HealScore = (0.5f - (float)HealthPercentage * 0.01f) + (float)Params.RecoveryStat * 0.025f;
+	float HealScore = (HS_ScoreBaseline - (float)HealthPercentage * HS_HealthPercentageRatio) + (float)Params.RecoveryStat * HS_RecoveryRatio;
 
-	if (HealthPercentage >= 75)
+	if (HealthPercentage >= SafeStatePercentage)
 	{
-		HealScore += -1.0f;
+		HealScore -= HS_SafeStatePenalty; // Almost never heal if health is in safe state.
 	}
-	else if (HealthPercentage <= 20)
+	else if (HealthPercentage <= CriticalStatePercentage)
 	{
-		HealScore += 0.4f; // Almost always heal if health is below 20%.
+		HealScore += HS_CriticalStateBonus; // Almost always heal if health is in critical state.
 	}
 
 	HealScore = AddRandomnessToScore(HealScore, Params);

@@ -2,8 +2,9 @@
 #include "CombatActions.h" 
 #include "EnemyBehavior.h"
 
+struct Gladiator;
+
 class PlayerController;
-class Gladiator;
 class ConsoleInterface;
 
 enum class CombatResult
@@ -19,23 +20,13 @@ private:
 	Gladiator* PlayerGladiator = nullptr;
 	Gladiator* EnemyGladiator = nullptr;
 
-	PlayerController& Controller;
 	ConsoleInterface& UIManager;
+	PlayerController& Controller;
 
 	CombatActions Actions;
 	EnemyBehavior EnemyAI{};
 
 	int LocalStageNumber = 0; // This variable copies the stage number from GameManager.
-
-public:
-
-	CombatManager(ConsoleInterface& InConsole, PlayerController& InController)
-		: UIManager(InConsole), Controller(InController) {}
-
-	// Combat Management
-	
-	CombatResult StartCombat(Gladiator& Enemy, int InputStageNumber);
-	void EndCombat();
 
 	bool StartPlayerTurn();
 	bool StartEnemyTurn();
@@ -52,4 +43,16 @@ public:
 	void CacheDecisionParameters();
 	void UpdateDecisionParameters();
 
+	// Combat Management
+
+	void EndCombat();
+
+public:
+
+	CombatManager(ConsoleInterface& InConsole, PlayerController& InController)
+		: UIManager(InConsole), Controller(InController) {}
+
+	// Combat Management
+
+	CombatResult StartCombat(Gladiator& Enemy, int InputStageNumber);
 };

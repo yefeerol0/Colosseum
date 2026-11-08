@@ -2,7 +2,6 @@
 #include "StatTypes.h"
 #include <string>
 
-
 struct UpgradeableStats
 {
 	// Stats
@@ -24,8 +23,8 @@ struct Gladiator
 	int MaxHealthPoints = 0;
 	int HealthPoints = 0;
 
-	float CritChance = 0;
-	float DodgeChance = 0;
+	int CritChance = 0;
+	int DodgeChance = 0;
 
 	bool IsDodging = false;
 	bool IsCounterattacking = false;

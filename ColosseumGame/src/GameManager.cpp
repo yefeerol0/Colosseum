@@ -1,9 +1,11 @@
 #include "GameManager.h"
+#include "Gladiator.h"
 #include "PlayerController.h"
 #include "GladiatorDataLoader.h"
 #include "ConsoleInterface.h"
 #include "CombatManager.h"
 #include "UpgradeSystem.h"
+#include "GameTuning.h"
 
 using namespace std;
 
@@ -26,7 +28,7 @@ void GameManager::StartGame()
 	Controller->PressAnyKey();
 	UIManager->DisplayStoryScreen();
 	Controller->EnterName();
-	StartUpgradePhase(StartPoints);
+	StartUpgradePhase(Tuning::StartPoints);
 }
 
 void GameManager::StartUpgradePhase(int UpgradePoints)
@@ -50,9 +52,9 @@ void GameManager::ManageCombatLoop()
 	}
 	else
 	{
-		if (StageNumber < 20)
+		if (StageNumber < Tuning::TotalStageCount)
 		{
-			StartUpgradePhase(RewardPoints);
+			StartUpgradePhase(Tuning::RewardPoints);
 		}
 		else
 		{

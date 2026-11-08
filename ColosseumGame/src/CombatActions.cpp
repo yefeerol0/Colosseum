@@ -1,7 +1,9 @@
 #include "CombatActions.h"
 #include "Gladiator.h"
 #include "TextColors.h"
+#include "GameTuning.h"
 #include <algorithm>
+using namespace Tuning;
 
 void CombatActions::Attack(Gladiator& Target, Gladiator& Instigator)
 {
@@ -12,11 +14,11 @@ void CombatActions::Attack(Gladiator& Target, Gladiator& Instigator)
 	
 	int Strength = Instigator.Stats.Strength;
 
-	int DamageAmount = RandomGen.GenerateRandomInt((Strength / 2), Strength);
+	int DamageAmount = RandomGen.GenerateRandomInt((Strength / StrengthDivisor), Strength);
 
 	if (CheckCrit(Instigator))
 	{
-		DamageAmount *= 2;
+		DamageAmount *= CritDamageMultiplier;
 	}
 
 	Target.TakeDamage(DamageAmount);
@@ -35,19 +37,17 @@ void CombatActions::Heal(Gladiator& Instigator)
 {
 	int Recovery = Instigator.Stats.Recovery;
 
-	int HealAmount = RandomGen.GenerateRandomInt((Recovery / 2), Recovery);
+	int HealAmount = RandomGen.GenerateRandomInt((Recovery / RecoveryDivisor), Recovery);
 
 	Instigator.RestoreHealth(HealAmount);
 
 	GenerateCombatLog(Instigator.Name + " healed for " + GREEN + std::to_string(HealAmount) + " health points." + RESET);
 }
 
-// CritChance and DodgeChance are 4% per point of Luck and Agility.
-
 bool CombatActions::CheckCrit(Gladiator& Instigator)
 {
 	int Luck = Instigator.Stats.Luck;
-	Instigator.CritChance = std::min(Luck * 4, 72);
+	Instigator.CritChance = std::min(Luck * CritChancePerLuck, CritChanceLimit);
 
 	if (Instigator.IsCounterattacking)
 	{
@@ -75,7 +75,7 @@ bool CombatActions::CheckCrit(Gladiator& Instigator)
 bool CombatActions::CheckDodge(Gladiator& Target)
 {
 	int Agility = Target.Stats.Agility;
-	Target.DodgeChance = std::min(Agility * 4, 72);
+	Target.DodgeChance = std::min(Agility * DodgeChancePerAgility, DodgeChanceLimit);
 
 	if (Target.IsDodging)
 	{
@@ -106,8 +106,13 @@ void CombatActions::GenerateCombatLog(const std::string& message)
 std::vector<std::string> CombatActions::ForwardCombatLogs()
 {
 	std::vector<std::string> LogPackage = LogsToBeAdded;
-	LogsToBeAdded.clear();
+	ClearLogsToBeAdded();
 	return LogPackage;
+}
+
+void CombatActions::ClearLogsToBeAdded()
+{
+	LogsToBeAdded.clear();
 }
 
 void CombatActions::ExecuteAction(ActionTypes SelectedAction, Gladiator& Instigator, Gladiator& Target)
@@ -129,6 +134,5 @@ void CombatActions::ExecuteAction(ActionTypes SelectedAction, Gladiator& Instiga
 
 		Heal(Instigator);
 		break;
-
 	}
 }

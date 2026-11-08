@@ -1,5 +1,6 @@
 #include "ConsoleInterface.h"
 #include "TextColors.h"
+#include "GameTuning.h"
 #include <iostream>
 #include <iomanip>
 
@@ -34,7 +35,7 @@ void ConsoleInterface::PrintTitle()
 
 void ConsoleInterface::PrintProgression(int StageNumber)
 {
-    cout << BOLD << YELLOW << "Stage: " << WHITE << StageNumber << "/20" << RESET << "\n";
+    cout << BOLD << YELLOW << "Stage: " << WHITE << StageNumber << "/" << Tuning::TotalStageCount << RESET << "\n";
 }
 
 void ConsoleInterface::PrintGladiatorNames(const std::string& PlayerName, const std::string& EnemyName)

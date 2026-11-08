@@ -4,12 +4,11 @@
 #include <string>
 #include <vector>
 
-class Gladiator;
+struct Gladiator;
 
 class CombatActions
 {
-
-public:
+private:
 
 	RandomGenerator RandomGen;
 
@@ -20,13 +19,14 @@ public:
 	bool CheckCrit(Gladiator& Instigator);
 	bool CheckDodge(Gladiator& Instigator);
 
-	const int CounterattackCritBonus = 20;
-	const int DodgeActionBonus = 20;
-
 	void GenerateCombatLog(const std::string& message);
-	std::vector<std::string> LogsToBeAdded;
-	std::vector<std::string> ForwardCombatLogs();
 
+	std::vector<std::string> LogsToBeAdded;
+
+public:
+
+	std::vector<std::string> ForwardCombatLogs();
+	void ClearLogsToBeAdded();
 	void ExecuteAction(ActionTypes SelectedAction, Gladiator& Instigator, Gladiator& Target);
 };
 

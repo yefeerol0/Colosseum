@@ -29,9 +29,6 @@ private:
 
 	void StartUpgradePhase(int UpgradePoints);
 
-	int StartPoints = 15; // Upgrade points given at the start of game.
-	int RewardPoints = 3; // Upgrade points given after each combat won.
-
 	// GAME LOOP
 
 	void ManageCombatLoop();

@@ -2,8 +2,6 @@
 #include "RandomGenerator.h"
 #include "ActionTypes.h"
 
-class CombatActions;
-
 struct DecisionParameters
 {
 	// Passive Parameters (to be cached)
@@ -28,13 +26,16 @@ struct DecisionParameters
 
 class EnemyBehavior
 {
-public:
-	
+private:
+
 	RandomGenerator RandomGen;
 
 	float CalculateAttackScore(const DecisionParameters& Params);
 	float CalculateDodgeScore(const DecisionParameters& Params);
 	float CalculateHealScore(const DecisionParameters& Params);
 	float AddRandomnessToScore(float Score, const DecisionParameters& Params);
+
+public:
+
 	ActionTypes DecideAction(const DecisionParameters& Params);
 };

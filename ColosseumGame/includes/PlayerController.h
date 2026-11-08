@@ -10,14 +10,20 @@ struct Gladiator;
 class PlayerController
 {
 
+private:
+
+	std::unique_ptr<Gladiator> PlayerGladiator;
+
+	int GetKey();
+
 public:
 
 	PlayerController();
 	~PlayerController();
 
-	std::unique_ptr<Gladiator> PlayerGladiator;
+	Gladiator& GetPlayerGladiator() const;
 
-	int GetKey();
+	// Input Events
 
 	void PressAnyKey();
     std::string EnterName();

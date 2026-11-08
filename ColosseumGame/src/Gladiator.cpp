@@ -1,9 +1,10 @@
 #include "Gladiator.h"
+#include "GameTuning.h"
 
 void Gladiator::InitializeValues()
 {
 	IsDead = false;
-	MaxHealthPoints = Stats.Vitality * 10;
+	MaxHealthPoints = Stats.Vitality * Tuning::HealthPerVitality;
 	HealthPoints = MaxHealthPoints;
 
 	IsCounterattacking = false;
