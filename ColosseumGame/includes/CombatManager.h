@@ -1,17 +1,12 @@
 #pragma once
 #include "CombatActions.h" 
 #include "EnemyBehavior.h"
+#include "CombatResult.h"
 
 struct Gladiator;
 
 class PlayerController;
 class ConsoleInterface;
-
-enum class CombatResult
-{
-	PlayerWon,
-	PlayerLost
-};
 
 class CombatManager
 {

@@ -22,48 +22,56 @@ GameManager::~GameManager() {}
 
 void GameManager::StartGame()
 {
-	StageNumber = 0;
+	while (true)
+	{
+		PlayRun();
+	}
+}
 
+void GameManager::PlayRun()
+{
+	SetupRun();
+	StartUpgradePhase(Tuning::StartPoints); // Initial upgrade / character creation, in some way.
+
+	for (int StageNumber = 1; StageNumber <= Tuning::TotalStageCount; ++StageNumber)
+	{
+		CombatResult Result = StartFight(StageNumber);
+
+		if (Result == CombatResult::PlayerLost)
+		{
+			GameOver();
+			return;
+		}
+		else if (StageNumber < Tuning::TotalStageCount) // else = CombatResult::PlayerWon
+		{
+			StartUpgradePhase(Tuning::RewardPoints);
+		}
+	}
+
+	GameWon();
+}
+
+void GameManager::SetupRun()
+{
+	Controller->ResetStats();
 	UIManager->DisplayStartMenu();
 	Controller->PressAnyKey();
 	UIManager->DisplayStoryScreen();
 	Controller->EnterName();
-	StartUpgradePhase(Tuning::StartPoints);
+}
+
+CombatResult GameManager::StartFight(int StageNumber)
+{
+	SpawnEnemy(StageNumber);
+	return CombatProcessor->StartCombat(*CurrentEnemy, StageNumber);
 }
 
 void GameManager::StartUpgradePhase(int UpgradePoints)
 {
-	UpgradeManager->UpgradeLoop(UpgradePoints);
-
-	ManageCombatLoop();
+	UpgradeManager->UpgradeLoop(UpgradePoints); 
 }
 
-void GameManager::ManageCombatLoop()
-{	
-	StageNumber++;
-	SpawnEnemy();
-
-	CombatResult Result = CombatProcessor->StartCombat(*CurrentEnemy, StageNumber);
-
-	if (Result == CombatResult::PlayerLost)
-	{
-		GameOver();
-		return;
-	}
-	else
-	{
-		if (StageNumber < Tuning::TotalStageCount)
-		{
-			StartUpgradePhase(Tuning::RewardPoints);
-		}
-		else
-		{
-			GameWon();
-		}
-	}
-}
-
-void GameManager::SpawnEnemy()
+void GameManager::SpawnEnemy(int StageNumber)
 {
 	CurrentEnemy = make_unique<Gladiator>(DataLoader->GetEnemy(StageNumber));
 }
@@ -71,18 +79,11 @@ void GameManager::SpawnEnemy()
 void GameManager::GameOver()
 {
 	UIManager->DisplayGameOverMenu();
-	ResetGame();
+	Controller->PressAnyKey();
 }
 
 void GameManager::GameWon()
 {
 	UIManager->DisplayWinScreen();
-	ResetGame();
-}
-
-void GameManager::ResetGame()
-{
-	Controller->ResetStats();
 	Controller->PressAnyKey();
-	StartGame();
 }

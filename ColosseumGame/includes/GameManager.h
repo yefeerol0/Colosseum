@@ -1,4 +1,5 @@
 #pragma once
+#include "CombatResult.h"
 #include <memory>
 
 struct Gladiator;
@@ -13,8 +14,6 @@ class GameManager
 {
 
 private:
-
-	int StageNumber = 0; // Which enemy the player is going to face, starting from 0, incremented at the start of each combat.
 
 	// Pointers
 
@@ -31,11 +30,12 @@ private:
 
 	// GAME LOOP
 
-	void ManageCombatLoop();
-	void SpawnEnemy();
+	void PlayRun();
+	void SetupRun();
+	void SpawnEnemy(int StageNumber);
+	CombatResult StartFight(int StageNumber);
 	void GameOver();
 	void GameWon();
-	void ResetGame();
 
 public:
 

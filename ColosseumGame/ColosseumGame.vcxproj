@@ -148,6 +148,7 @@
     <ClInclude Include="includes\ActionTypes.h" />
     <ClInclude Include="includes\CombatActions.h" />
     <ClInclude Include="includes\CombatManager.h" />
+    <ClInclude Include="includes\CombatResult.h" />
     <ClInclude Include="includes\ConsoleInterface.h" />
     <ClInclude Include="includes\EnemyBehavior.h" />
     <ClInclude Include="includes\GameManager.h" />
