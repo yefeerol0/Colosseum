@@ -26,6 +26,9 @@ struct Gladiator
 	int CritChance = 0;
 	int DodgeChance = 0;
 
+	// CritChance and DodgeChance are only used in their own calculate functions in CombatActions.cpp. 
+	// Therefore, they could be local variables at there but I felt like they would be overlooked, so I wanted to store them here for clarity.
+
 	bool IsDodging = false;
 	bool IsCounterattacking = false;
 
@@ -39,7 +42,7 @@ struct Gladiator
 
 	void InitializeValues();
 	void TakeDamage(int DamageAmount);
-	void RestoreHealth(int HealAmount);
+	int RestoreHealth(int HealAmount);
 	bool CheckIfDead();
 	void UpgradeStat(StatTypes Stat);
 };

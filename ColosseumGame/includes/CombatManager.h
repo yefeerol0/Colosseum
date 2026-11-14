@@ -28,19 +28,20 @@ private:
 
 	// UI Functions
 
+	void ForwardAllPendingLogs();
 	void SetUpCombatInterface();
 	void UpdateCombatInterface();
 
 	// AI Behavior Parameters
 
-	DecisionParameters EnemyDecisionParameters{};
+	DecisionParameters EnemyDecisionParameters;
 
 	void CacheDecisionParameters();
 	void UpdateDecisionParameters();
 
 	// Combat Management
 
-	void EndCombat();
+	void EndCombat(const Gladiator& Winner);
 
 public:
 

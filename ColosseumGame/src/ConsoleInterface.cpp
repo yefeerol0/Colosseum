@@ -29,13 +29,13 @@ void ConsoleInterface::PrintTitle()
 ##       ##    ## ##       ##    ##       ##       ## ##       ##    ## ##     ##
 ##    ## ##    ## ##       ##    ## ##    ## ##    ## ##       ##    ## ##     ##
  ######   ######  ########  ######   ######   ######  ########  ######  ##     ##
-                                                                              
+																			  
 	)ASCII" << RESET << "\n";
 }
 
 void ConsoleInterface::PrintProgression(int StageNumber)
 {
-    cout << BOLD << YELLOW << "Stage: " << WHITE << StageNumber << "/" << Tuning::TotalStageCount << RESET << "\n";
+	cout << BOLD << YELLOW << "Stage: " << WHITE << StageNumber << "/" << Tuning::TotalStageCount << RESET << "\n";
 }
 
 void ConsoleInterface::PrintGladiatorNames(const std::string& PlayerName, const std::string& EnemyName)
@@ -81,8 +81,8 @@ void ConsoleInterface::PrintCombatLog()
 
 void ConsoleInterface::PrintActionOptions()
 {
-	cout << YELLOW << BLINK << "Choose your next action:" << RESET  "\n";
-	cout << RED << left << setw(12) << "{1} Attack" << BLUE << setw(12) << "{2} Dodge" << GREEN << setw(14) << "{3} Heal" << RESET  "\n";
+	cout << YELLOW << BLINK << "Choose your next action:" << RESET << "\n";
+	cout << RED << left << setw(12) << "{1} Attack" << BLUE << setw(12) << "{2} Dodge" << GREEN << setw(14) << "{3} Heal" << RESET << "\n";
 }
 
 void ConsoleInterface::ClearCombatLog()
@@ -119,7 +119,7 @@ void ConsoleInterface::DisplayStartMenu()
 	PrintTitle();
 
 	cout << BOLD << YELLOW << "Welcome to the Colosseum!" << RESET << "\n";
-	cout << BLINK << BOLD << WHITE "Press any key to start!" << RESET << "\n";
+	cout << BLINK << BOLD << WHITE << "Press any key to start!" << RESET << "\n";
 }
 
 void ConsoleInterface::DisplayStoryScreen()
@@ -144,7 +144,7 @@ void ConsoleInterface::DisplayUpgradeScreen(const UpgradeData& UIData)
 
 	PrintSeparator(); //-----
 
-	cout << ITALIC << YELLOW << "Gladiator,it is time to power up!" << RESET << "\n";
+	cout << ITALIC << YELLOW << "Gladiator, it is time to power up!" << RESET << "\n";
 	cout << BOLD << YELLOW << "Available Points: " << WHITE << to_string(UIData.AvailablePoints) << RESET << "\n";
 
 	PrintSeparator(); //-----

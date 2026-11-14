@@ -2,6 +2,7 @@
 #include "PlayerController.h"
 #include "Gladiator.h"
 #include "ConsoleInterface.h"
+#include "TextColors.h"
 
 CombatResult CombatManager::StartCombat(Gladiator& Enemy, int InputStageNumber)
 {
@@ -14,6 +15,10 @@ CombatResult CombatManager::StartCombat(Gladiator& Enemy, int InputStageNumber)
 	EnemyGladiator->InitializeValues();
 
 	CacheDecisionParameters();
+
+	UIManager.ClearCombatLog();
+	Actions.ClearLogsToBeAdded();
+
 	UpdateCombatInterface();
 
 	while (true)
@@ -30,12 +35,14 @@ CombatResult CombatManager::StartCombat(Gladiator& Enemy, int InputStageNumber)
 	}
 }
 
-void CombatManager::EndCombat()
+void CombatManager::EndCombat(const Gladiator& Winner)
 {
-	UIManager.ClearCombatLog();
-	Actions.ClearLogsToBeAdded();
-	UIManager.AddMessageToCombatLog("The battle is over!");
-	UpdateCombatInterface();
+	ForwardAllPendingLogs();
+	UIManager.AddMessageToCombatLog("-----");
+	UIManager.AddMessageToCombatLog("The battle is over! " GREEN + Winner.Name + RESET + " has won!");
+	UIManager.AddMessageToCombatLog(BLINK "Press any key to continue..." RESET);
+	SetUpCombatInterface();         
+	Controller.PressAnyKey();
 }
 
 bool CombatManager::StartPlayerTurn()
@@ -53,7 +60,7 @@ bool CombatManager::StartPlayerTurn()
 
 	if (EnemyGladiator->IsDead)
 	{
-		EndCombat();
+		EndCombat(*PlayerGladiator);
 		return true;
 	}
 
@@ -71,12 +78,20 @@ bool CombatManager::StartEnemyTurn()
 
 	if (PlayerGladiator->IsDead)
 	{
-		EndCombat();
+		EndCombat(*EnemyGladiator);
 		return true;
 	}
 
 	UpdateCombatInterface();
 	return false;
+}
+
+void CombatManager::ForwardAllPendingLogs()
+{
+	for (const std::string& Log : Actions.ForwardCombatLogs())
+	{
+		UIManager.AddMessageToCombatLog(Log);
+	}
 }
 
 void CombatManager::SetUpCombatInterface()
@@ -96,11 +111,7 @@ void CombatManager::SetUpCombatInterface()
 
 void CombatManager::UpdateCombatInterface()
 {
-	for (const std::string& Log : Actions.ForwardCombatLogs())
-	{
-		UIManager.AddMessageToCombatLog(Log);
-	}
-
+	ForwardAllPendingLogs();
 	SetUpCombatInterface();
 }
 

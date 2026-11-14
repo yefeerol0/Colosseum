@@ -1,102 +1,103 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Kaynak Dosyalar">
+    <Filter Include="Source Files">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Üst Bilgi Dosyaları">
+    <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Kaynak Dosyaları">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Data">
+      <UniqueIdentifier>{e20f89fc-0ce2-4887-9028-f801bd30b499}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="includes\Gladiator.h">
-      <Filter>Üst Bilgi Dosyaları</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="includes\CombatManager.h">
-      <Filter>Üst Bilgi Dosyaları</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="includes\RandomGenerator.h">
-      <Filter>Üst Bilgi Dosyaları</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="includes\CombatActions.h">
-      <Filter>Üst Bilgi Dosyaları</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="includes\GameManager.h">
-      <Filter>Üst Bilgi Dosyaları</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="includes\PlayerController.h">
-      <Filter>Üst Bilgi Dosyaları</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="includes\GladiatorDataLoader.h">
-      <Filter>Üst Bilgi Dosyaları</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="includes\ConsoleInterface.h">
-      <Filter>Üst Bilgi Dosyaları</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="includes\EnemyBehavior.h">
-      <Filter>Üst Bilgi Dosyaları</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="includes\ActionTypes.h">
-      <Filter>Üst Bilgi Dosyaları</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="includes\StatTypes.h">
-      <Filter>Üst Bilgi Dosyaları</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="includes\UpgradeSystem.h">
-      <Filter>Üst Bilgi Dosyaları</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="includes\TextColors.h">
-      <Filter>Üst Bilgi Dosyaları</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="includes\GameTuning.h">
-      <Filter>Üst Bilgi Dosyaları</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="includes\CombatResult.h">
-      <Filter>Üst Bilgi Dosyaları</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Gladiator.cpp">
-      <Filter>Kaynak Dosyalar</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp">
-      <Filter>Kaynak Dosyalar</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\CombatManager.cpp">
-      <Filter>Kaynak Dosyalar</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\RandomGenerator.cpp">
-      <Filter>Kaynak Dosyalar</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\CombatActions.cpp">
-      <Filter>Kaynak Dosyalar</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\GameManager.cpp">
-      <Filter>Kaynak Dosyalar</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\PlayerController.cpp">
-      <Filter>Kaynak Dosyalar</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\GladiatorDataLoader.cpp">
-      <Filter>Kaynak Dosyalar</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ConsoleInterface.cpp">
-      <Filter>Kaynak Dosyalar</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\EnemyBehavior.cpp">
-      <Filter>Kaynak Dosyalar</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\UpgradeSystem.cpp">
-      <Filter>Kaynak Dosyalar</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\Enemies.json" />
+    <None Include="data\Enemies.json">
+      <Filter>Data</Filter>
+    </None>
   </ItemGroup>
 </Project>

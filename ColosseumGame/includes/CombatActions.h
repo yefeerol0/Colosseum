@@ -17,7 +17,7 @@ private:
 	void Heal(Gladiator& Instigator);
 
 	bool CheckCrit(Gladiator& Instigator);
-	bool CheckDodge(Gladiator& Instigator);
+	bool CheckDodge(Gladiator& Target);
 
 	void GenerateCombatLog(const std::string& message);
 

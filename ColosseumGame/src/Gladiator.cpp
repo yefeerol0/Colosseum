@@ -15,17 +15,27 @@ void Gladiator::TakeDamage(int DamageAmount)
 {
 	HealthPoints -= DamageAmount;
 
+	if (HealthPoints < 0)
+	{
+		HealthPoints = 0;
+	}
+
 	IsDead = CheckIfDead();
 }
 
-void Gladiator::RestoreHealth(int HealAmount)
+
+int Gladiator::RestoreHealth(int HealAmount)
 {
+	int InitialHealth = HealthPoints;
+
 	HealthPoints += HealAmount;
 
 	if (HealthPoints > MaxHealthPoints)
 	{
 		HealthPoints = MaxHealthPoints;
 	}
+
+	return HealthPoints - InitialHealth;
 }
 
 bool Gladiator::CheckIfDead()

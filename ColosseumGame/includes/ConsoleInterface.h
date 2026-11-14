@@ -28,7 +28,7 @@ class ConsoleInterface
 private:
 
 	std::deque<std::string> CombatLogLines;
-	int MaxLogLines = 8;
+	static constexpr std::size_t MaxLogLines = 8;
 
 	void ClearConsole();
 	void PrintSeparator();

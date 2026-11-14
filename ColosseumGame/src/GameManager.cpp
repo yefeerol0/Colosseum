@@ -18,7 +18,7 @@ GameManager::GameManager()
 	UpgradeManager = make_unique<UpgradeSystem>(*UIManager, *Controller);
 }
 
-GameManager::~GameManager() {}
+GameManager::~GameManager() = default;
 
 void GameManager::StartGame()
 {
@@ -62,18 +62,13 @@ void GameManager::SetupRun()
 
 CombatResult GameManager::StartFight(int StageNumber)
 {
-	SpawnEnemy(StageNumber);
-	return CombatProcessor->StartCombat(*CurrentEnemy, StageNumber);
+	Gladiator EnemyToSpawn = DataLoader->GetEnemy(StageNumber);
+	return CombatProcessor->StartCombat(EnemyToSpawn, StageNumber);
 }
 
 void GameManager::StartUpgradePhase(int UpgradePoints)
 {
 	UpgradeManager->UpgradeLoop(UpgradePoints); 
-}
-
-void GameManager::SpawnEnemy(int StageNumber)
-{
-	CurrentEnemy = make_unique<Gladiator>(DataLoader->GetEnemy(StageNumber));
 }
 
 void GameManager::GameOver()

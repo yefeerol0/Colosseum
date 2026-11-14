@@ -1,6 +1,7 @@
 #include "PlayerController.h"
 #include "Gladiator.h"
 #include "ConsoleInterface.h"
+#include <string>
 #include <conio.h> // For _getch() function
 #include <cstdlib>
 #include <iostream>
@@ -24,7 +25,7 @@ int PlayerController::GetKey()
 	return Key;
 }
 
-Gladiator& PlayerController::GetPlayerGladiator() const
+Gladiator& PlayerController::GetPlayerGladiator()
 {
 	return *PlayerGladiator;
 }
@@ -38,12 +39,21 @@ void PlayerController::PressAnyKey()
 	// Therefore, I added (void) to tell the compiler the result is not important.
 }
 
-std::string PlayerController::EnterName()
+void PlayerController::EnterName()
 {
-	std::string name;
-	std::cin >> name;
-	PlayerGladiator->Name = name;
-	return name;
+	const std::size_t MaxAllowedNameLength = 12;
+
+	std::getline(std::cin, PlayerGladiator->Name);
+
+	if (PlayerGladiator->Name.empty())
+	{
+		PlayerGladiator->Name = "Gladiator";
+	}
+
+	if (PlayerGladiator->Name.size() > MaxAllowedNameLength)
+	{
+		PlayerGladiator->Name.resize(MaxAllowedNameLength);
+	}
 }
 
 ActionTypes PlayerController::DecideAction()

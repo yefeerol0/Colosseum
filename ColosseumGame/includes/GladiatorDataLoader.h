@@ -8,17 +8,17 @@ class GladiatorDataLoader
 
 private:
 
-    std::array<Gladiator, Tuning::TotalStageCount> GladiatorEnemies;
+	std::array<Gladiator, Tuning::TotalStageCount> GladiatorEnemies;
 
-    // Using type 'vector' instead of 'array' is another sensible approach. (std::vector<Gladiator> GladiatorEnemies;)
+	// Using type 'vector' instead of 'array' is another sensible approach. (std::vector<Gladiator> GladiatorEnemies;)
 	// However, I used 'array' because the number of enemies will be fixed during runtime in this project to maintain scope.
 
-    void LoadFromFile();
+	void LoadFromFile();
 
 public:
 
-    GladiatorDataLoader();
+	GladiatorDataLoader();
 
-    const Gladiator& GetEnemy(int StageNumber) const;
+	const Gladiator& GetEnemy(int StageNumber) const;
 
 };

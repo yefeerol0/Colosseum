@@ -1,7 +1,6 @@
 #pragma once
 #include "ActionTypes.h"
 #include "StatTypes.h"
-#include <string>
 #include <memory>
 
 struct UpgradeData;
@@ -21,12 +20,12 @@ public:
 	PlayerController();
 	~PlayerController();
 
-	Gladiator& GetPlayerGladiator() const;
+	Gladiator& GetPlayerGladiator();
 
 	// Input Events
 
 	void PressAnyKey();
-    std::string EnterName();
+	void EnterName();
 
 	// Combat
 

@@ -6,22 +6,22 @@ struct DecisionParameters
 {
 	// Passive Parameters (to be cached)
 
-	int SelfMaxHealth;
-	int PlayerMaxHealth;
+	int SelfMaxHealth = 0;
+	int PlayerMaxHealth = 0;
 
-	int StrengthStat;
-	int LuckStat;
-	int AgilityStat;
-	int RecoveryStat;
+	int StrengthStat = 0;
+	int LuckStat = 0;
+	int AgilityStat = 0;
+	int RecoveryStat = 0;
 
-	float Unpredictability;
+	float Unpredictability = 0.0f;
 
 	// Active Parameters
 
-	int SelfHealth;
-	int PlayerHealth;
-	bool IsPlayerDodging;
-	bool IsCounterattacking;
+	int SelfHealth = 0;
+	int PlayerHealth = 0;
+	bool IsPlayerDodging = false;
+	bool IsCounterattacking = false;
 };
 
 class EnemyBehavior

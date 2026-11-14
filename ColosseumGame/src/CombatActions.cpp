@@ -39,9 +39,9 @@ void CombatActions::Heal(Gladiator& Instigator)
 
 	int HealAmount = RandomGen.GenerateRandomInt((Recovery / RecoveryDivisor), Recovery);
 
-	Instigator.RestoreHealth(HealAmount);
+	int RestoredAmount = Instigator.RestoreHealth(HealAmount);
 
-	GenerateCombatLog(Instigator.Name + " healed for " + GREEN + std::to_string(HealAmount) + " health points." + RESET);
+	GenerateCombatLog(Instigator.Name + " healed for " + GREEN + std::to_string(RestoredAmount) + " health points." + RESET);
 }
 
 bool CombatActions::CheckCrit(Gladiator& Instigator)
