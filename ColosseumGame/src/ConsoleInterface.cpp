@@ -79,10 +79,12 @@ void ConsoleInterface::PrintCombatLog()
 	}
 }
 
-void ConsoleInterface::PrintActionOptions()
+void ConsoleInterface::PrintActionOptions(int RemainingHeals)
 {
 	cout << YELLOW << BLINK << "Choose your next action:" << RESET << "\n";
-	cout << RED << left << setw(12) << "{1} Attack" << BLUE << setw(12) << "{2} Dodge" << GREEN << setw(14) << "{3} Heal" << RESET << "\n";
+
+	cout << RED << left << setw(12) << "{1} Attack" << BLUE << setw(12) << "{2} Dodge"
+		 << GREEN << setw(14) << ("{3} Heal (" + to_string(RemainingHeals) + ")") << RESET << "\n";
 }
 
 void ConsoleInterface::ClearCombatLog()
@@ -110,7 +112,7 @@ void ConsoleInterface::DisplayCombatHUD(const ConsoleData& UIData)
 
 	PrintSeparator(); //-----
 
-	PrintActionOptions();	
+	PrintActionOptions(UIData.PlayerHealsLeft);	
 }
 
 void ConsoleInterface::DisplayStartMenu()

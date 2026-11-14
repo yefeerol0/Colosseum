@@ -17,6 +17,8 @@ namespace Tuning
 
 	// CombatActions
 
+	constexpr int MaxHealsPerFight = 5;
+
 	constexpr int StrengthDivisor = 2;
 	constexpr int RecoveryDivisor = 2;
 
@@ -52,4 +54,5 @@ namespace Tuning
 	constexpr float HS_RecoveryRatio = 0.025f;
 	constexpr float HS_SafeStatePenalty = 1.0f;
 	constexpr float HS_CriticalStateBonus = 0.4f;
+	constexpr float HS_OutOfHealsPenalty = 1.0f;
 }

@@ -49,9 +49,8 @@ bool CombatManager::StartPlayerTurn()
 {
 	ActionTypes SelectedAction = Controller.DecideAction();
 
-	while (SelectedAction == ActionTypes::Invalid)
+	while (!CheckIsActionAllowed(SelectedAction))
 	{
-		UIManager.AddMessageToCombatLog("Invalid action selected. Press '1', '2', or '3' to choose an action.");
 		UpdateCombatInterface();
 		SelectedAction = Controller.DecideAction();
 	}
@@ -86,6 +85,24 @@ bool CombatManager::StartEnemyTurn()
 	return false;
 }
 
+bool CombatManager::CheckIsActionAllowed(ActionTypes SelectedAction)
+{
+	if (SelectedAction == ActionTypes::Invalid)
+	{
+		UIManager.AddMessageToCombatLog("Invalid action selected. Press '1', '2', or '3' to choose an action.");
+		return false;
+	}
+	else if (SelectedAction == ActionTypes::Heal && PlayerGladiator->HealsLeft <= 0)
+	{
+		UIManager.AddMessageToCombatLog("You have no heals left. Choose another action.");
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
 void CombatManager::ForwardAllPendingLogs()
 {
 	for (const std::string& Log : Actions.ForwardCombatLogs())
@@ -102,6 +119,7 @@ void CombatManager::SetUpCombatInterface()
 	UIData.PlayerName = PlayerGladiator->Name;
 	UIData.EnemyName = EnemyGladiator->Name;
 	UIData.EnemyHealth = EnemyGladiator->HealthPoints;
+	UIData.PlayerHealsLeft = PlayerGladiator->HealsLeft;
 	UIData.PlayerHealth = PlayerGladiator->HealthPoints;
 	UIData.PlayerMaxHealth = PlayerGladiator->MaxHealthPoints;
 	UIData.EnemyMaxHealth = EnemyGladiator->MaxHealthPoints;
@@ -132,4 +150,5 @@ void CombatManager::UpdateDecisionParameters()
 	EnemyDecisionParameters.PlayerHealth = PlayerGladiator->HealthPoints;
 	EnemyDecisionParameters.IsPlayerDodging = PlayerGladiator->IsDodging;
 	EnemyDecisionParameters.IsCounterattacking = EnemyGladiator->IsCounterattacking;
+	EnemyDecisionParameters.IsOutOfHeals = (EnemyGladiator->HealsLeft <= 0);
 }

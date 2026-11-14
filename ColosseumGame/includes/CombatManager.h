@@ -26,6 +26,10 @@ private:
 	bool StartPlayerTurn();
 	bool StartEnemyTurn();
 
+	// Actions
+
+	bool CheckIsActionAllowed(ActionTypes SelectedAction);
+
 	// UI Functions
 
 	void ForwardAllPendingLogs();

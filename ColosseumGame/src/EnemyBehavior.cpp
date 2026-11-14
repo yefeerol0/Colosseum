@@ -39,6 +39,11 @@ float EnemyBehavior::CalculateDodgeScore(const DecisionParameters& Params)
 
 float EnemyBehavior::CalculateHealScore(const DecisionParameters& Params)
 {
+	if (Params.IsOutOfHeals)
+	{
+		return -(HS_OutOfHealsPenalty); // Never heal if out of heals.
+	}
+
 	int HealthPercentage = (Params.SelfHealth * 100) / Params.SelfMaxHealth;
 
 	float HealScore = (HS_ScoreBaseline - (float)HealthPercentage * HS_HealthPercentageRatio) + (float)Params.RecoveryStat * HS_RecoveryRatio;

@@ -20,6 +20,7 @@ struct DecisionParameters
 
 	int SelfHealth = 0;
 	int PlayerHealth = 0;
+	bool IsOutOfHeals = false;
 	bool IsPlayerDodging = false;
 	bool IsCounterattacking = false;
 };

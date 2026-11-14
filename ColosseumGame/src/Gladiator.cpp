@@ -7,6 +7,8 @@ void Gladiator::InitializeValues()
 	MaxHealthPoints = Stats.Vitality * Tuning::HealthPerVitality;
 	HealthPoints = MaxHealthPoints;
 
+	HealsLeft = Tuning::MaxHealsPerFight;
+
 	IsCounterattacking = false;
 	IsDodging = false;
 }

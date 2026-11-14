@@ -9,6 +9,7 @@ struct ConsoleData
 	int StageNumber = 0;
 	int PlayerHealth = 0;
 	int PlayerMaxHealth = 0;
+	int PlayerHealsLeft = 0;
 	int EnemyHealth = 0;
 	int EnemyMaxHealth = 0;
 };
@@ -46,7 +47,7 @@ private:
 	// Combat Log Functions
 
 	void PrintCombatLog();
-	void PrintActionOptions();
+	void PrintActionOptions(int RemainingHeals);
 
 public:
 

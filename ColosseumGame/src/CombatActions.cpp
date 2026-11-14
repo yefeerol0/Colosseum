@@ -35,6 +35,13 @@ void CombatActions::Dodge(Gladiator& Instigator)
 
 void CombatActions::Heal(Gladiator& Instigator)
 {
+	if (Instigator.HealsLeft <= 0)
+	{
+		GenerateCombatLog("Heal is used with no HealsLeft. Turn is skipped.");
+		return; // This should never be called since CombatManager already checks it. 
+				// But this is a safety measure in case of any unexpected AI behavior occurs.
+	}
+
 	int Recovery = Instigator.Stats.Recovery;
 
 	int HealAmount = RandomGen.GenerateRandomInt((Recovery / RecoveryDivisor), Recovery);
@@ -42,6 +49,8 @@ void CombatActions::Heal(Gladiator& Instigator)
 	int RestoredAmount = Instigator.RestoreHealth(HealAmount);
 
 	GenerateCombatLog(Instigator.Name + " healed for " + GREEN + std::to_string(RestoredAmount) + " health points." + RESET);
+
+	Instigator.HealsLeft--;
 }
 
 bool CombatActions::CheckCrit(Gladiator& Instigator)

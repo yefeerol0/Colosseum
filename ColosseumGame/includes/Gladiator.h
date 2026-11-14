@@ -22,6 +22,7 @@ struct Gladiator
 	std::string Name = "Unknown";
 	int MaxHealthPoints = 0;
 	int HealthPoints = 0;
+	int HealsLeft = 0;
 
 	int CritChance = 0;
 	int DodgeChance = 0;
