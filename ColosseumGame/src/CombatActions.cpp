@@ -16,9 +16,15 @@ void CombatActions::Attack(Gladiator& Target, Gladiator& Instigator)
 
 	int DamageAmount = RandomGen.GenerateRandomInt((Strength / StrengthDivisor), Strength);
 
-	if (CheckCrit(Instigator))
+	auto [IsCritical, ExcessDamage] = CheckCrit(Instigator); 
+	
+	// If the CritChance exceeds the limit, the excess damage is added to the damage amount.
+	// Therefore, to return two separate values and unpack them, I used std::pair + structured binding.
+
+	if (IsCritical)
 	{
 		DamageAmount *= CritDamageMultiplier;
+		DamageAmount += ExcessDamage;
 	}
 
 	Target.TakeDamage(DamageAmount);
@@ -44,7 +50,7 @@ void CombatActions::Heal(Gladiator& Instigator)
 
 	int Recovery = Instigator.Stats.Recovery;
 
-	int HealAmount = RandomGen.GenerateRandomInt((Recovery / RecoveryDivisor), Recovery);
+	int HealAmount = RandomGen.GenerateRandomInt((Recovery * RecoveryMultiplierMin), (Recovery * RecoveryMultiplierMax));
 
 	int RestoredAmount = Instigator.RestoreHealth(HealAmount);
 
@@ -53,10 +59,10 @@ void CombatActions::Heal(Gladiator& Instigator)
 	Instigator.HealsLeft--;
 }
 
-bool CombatActions::CheckCrit(Gladiator& Instigator)
+std::pair<bool, int> CombatActions::CheckCrit(Gladiator& Instigator)
 {
 	int Luck = Instigator.Stats.Luck;
-	Instigator.CritChance = std::min(Luck * CritChancePerLuck, CritChanceLimit);
+	Instigator.CritChance = Luck * CritChancePerLuck;
 
 	if (Instigator.IsCounterattacking)
 	{
@@ -68,17 +74,31 @@ bool CombatActions::CheckCrit(Gladiator& Instigator)
 		// The intention behind this was to avoid stalemate situations where gladiators keep dodging.
 	}
 
+	int ExcessCritDamage = 0;
+
+	if (Instigator.CritChance > CritChanceLimit)
+	{
+		ExcessCritDamage = CalculateExcessCritDamage(Instigator.CritChance);
+		Instigator.CritChance = CritChanceLimit;
+	}
+
 	int CritRoll = RandomGen.GenerateRandomInt(1, 100);
 
 	if (CritRoll <= Instigator.CritChance)
 	{
 		GenerateCombatLog(Instigator.Name + " landed a" + ORANGE + " critical hit!" + RESET);
-		return true;
+		return {true, ExcessCritDamage};
 	}
 	else
 	{
-		return false;
+		return {false, 0};
 	}
+}
+
+int CombatActions::CalculateExcessCritDamage(int CritChance)
+{
+	int ExcessLuck = (CritChance - CritChanceLimit) / CritChancePerLuck;
+	return ExcessLuck * CritDamagePerExcessLuck;
 }
 
 bool CombatActions::CheckDodge(Gladiator& Target)

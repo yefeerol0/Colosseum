@@ -3,6 +3,7 @@
 #include "ActionTypes.h"
 #include <string>
 #include <vector>
+#include <utility>
 
 struct Gladiator;
 
@@ -16,8 +17,10 @@ private:
 	void Dodge(Gladiator& Instigator);
 	void Heal(Gladiator& Instigator);
 
-	bool CheckCrit(Gladiator& Instigator);
+	std::pair<bool, int> CheckCrit(Gladiator& Instigator);
 	bool CheckDodge(Gladiator& Target);
+
+	int CalculateExcessCritDamage(int CritChance);
 
 	void GenerateCombatLog(const std::string& message);
 

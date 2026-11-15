@@ -20,15 +20,17 @@ namespace Tuning
 	constexpr int MaxHealsPerFight = 5;
 
 	constexpr int StrengthDivisor = 2;
-	constexpr int RecoveryDivisor = 2;
+	constexpr int RecoveryMultiplierMin = 2;
+	constexpr int RecoveryMultiplierMax = 3;
 
-	constexpr int CounterattackCritBonus = 20;
+	constexpr int CounterattackCritBonus = 50;
 	constexpr int DodgeActionBonus = 20;
 
 	constexpr int CritChanceLimit = 72;
 	constexpr int DodgeChanceLimit = 72;
 
 	constexpr int CritDamageMultiplier = 2;
+	constexpr int CritDamagePerExcessLuck = 2;
 
 	constexpr int CritChancePerLuck = 4;
 	constexpr int DodgeChancePerAgility = 4;
