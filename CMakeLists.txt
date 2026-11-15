@@ -22,6 +22,8 @@ set(COLOSSEUM_SOURCES
     ${PROJECT_SOURCE_DIR}/ColosseumGame/src/UpgradeSystem.cpp
 )
 
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+
 add_executable(Colosseum ${COLOSSEUM_SOURCES})
 
 # HEADER DIRECTORIES
@@ -30,8 +32,10 @@ target_include_directories(Colosseum PRIVATE
     ${PROJECT_SOURCE_DIR}/ColosseumGame/libs
 )
 
-add_custom_command(TARGET Colosseum POST_BUILD
+add_custom_target(CopyGameData ALL
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
             "${PROJECT_SOURCE_DIR}/ColosseumGame/data/Enemies.json"
             "$<TARGET_FILE_DIR:Colosseum>"
 )
+
+add_dependencies(CopyGameData Colosseum)

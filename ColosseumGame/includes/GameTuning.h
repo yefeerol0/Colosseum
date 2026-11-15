@@ -32,8 +32,8 @@ namespace Tuning
 	constexpr int CritDamageMultiplier = 2;
 	constexpr int CritDamagePerExcessLuck = 2;
 
-	constexpr int CritChancePerLuck = 4;
-	constexpr int DodgeChancePerAgility = 4;
+	constexpr int CritChancePerLuck = 5;
+	constexpr int DodgeChancePerAgility = 3;
 
 	// EnemyBehavior
 
